@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>講師ポータル｜明光義塾 西八王子いちょう通り教室</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; background: #f5f4f0; color: #1a1a18; min-height: 100vh; font-size: 14px; }
+
+#login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f5f4f0; }
+.login-card { background: #fff; border: 0.5px solid #e0dfd6; border-radius: 16px; padding: 40px 36px 36px; width: 360px; }
+.login-brand { text-align: center; margin-bottom: 28px; }
+.login-brand-name { font-size: 11px; font-weight: 700; color: #888780; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.login-brand-title { font-size: 20px; font-weight: 700; color: #1a1a18; }
+.login-field { margin-bottom: 14px; }
+.login-label { font-size: 11px; font-weight: 700; color: #888780; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; display: block; }
+.login-input { width: 100%; padding: 10px 12px; border: 0.5px solid #d3d1c7; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #1a1a18; outline: none; transition: border-color 0.12s; }
+.login-input:focus { border-color: #378ADD; }
+.login-btn { width: 100%; padding: 11px; background: #1a1a18; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; margin-top: 8px; transition: background 0.12s; }
+.login-btn:hover { background: #444441; }
+.login-error { font-size: 12px; color: #A32D2D; background: #FCEBEB; border-radius: 6px; padding: 8px 12px; margin-top: 10px; display: none; text-align: center; }
+
+#portal-screen { display: none; flex-direction: row; height: 100vh; }
+
+.sidebar { width: 248px; flex-shrink: 0; background: #fff; border-right: 0.5px solid #e0dfd6; display: flex; flex-direction: column; overflow: hidden; }
+.logo { padding: 16px 16px 13px; border-bottom: 0.5px solid #e0dfd6; flex-shrink: 0; }
+.logo-eyebrow { font-size: 10px; font-weight: 700; color: #b4b2a9; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+.logo-title { font-size: 13px; font-weight: 700; color: #1a1a18; }
+.nav { flex: 1; padding: 10px 8px; overflow-y: auto; }
+.nav-section { margin-bottom: 16px; }
+.nav-label { font-size: 10px; font-weight: 700; color: #b4b2a9; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 8px; margin-bottom: 4px; }
+.nav-btn { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 7px; cursor: pointer; font-size: 12.5px; color: #5f5e5a; border: none; background: none; width: 100%; text-align: left; transition: all 0.1s; font-family: inherit; }
+.nav-btn:hover { background: #f5f4f0; color: #1a1a18; }
+.nav-btn.active { background: #f5f4f0; color: #1a1a18; font-weight: 700; border: 0.5px solid #d3d1c7; }
+.nav-btn.active .ndot { background: #378ADD; }
+.ndot { width: 5px; height: 5px; border-radius: 50%; background: #d3d1c7; flex-shrink: 0; }
+.nicon { font-size: 13px; width: 16px; text-align: center; flex-shrink: 0; }
+
+.tree-group { width: 100%; }
+.tree-parent { display: flex; align-items: center; width: 100%; border: none; background: none; cursor: pointer; font-family: inherit; padding: 6px 8px; border-radius: 7px; transition: background 0.1s; }
+.tree-parent:hover { background: #f5f4f0; }
+.tree-arrow { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; color: #b4b2a9; font-size: 8px; flex-shrink: 0; transition: transform 0.15s; margin-right: 6px; }
+.tree-arrow.open { transform: rotate(90deg); }
+.tree-parent-label { flex: 1; text-align: left; font-size: 12.5px; color: #5f5e5a; font-family: inherit; }
+.tree-children { overflow: hidden; max-height: 0; transition: max-height 0.22s ease; }
+.tree-children.open { max-height: 1400px; }
+
+.tree-sub-group { padding-left: 14px; }
+.tree-sub-parent { display: flex; align-items: center; width: 100%; border: none; background: none; cursor: pointer; font-family: inherit; padding: 5px 8px; border-radius: 6px; transition: background 0.1s; }
+.tree-sub-parent:hover { background: #f5f4f0; }
+.tree-sub-arrow { width: 12px; height: 12px; display: flex; align-items: center; justify-content: center; color: #b4b2a9; font-size: 7px; flex-shrink: 0; transition: transform 0.15s; margin-right: 5px; }
+.tree-sub-arrow.open { transform: rotate(90deg); }
+.tree-sub-label { flex: 1; text-align: left; font-size: 12px; color: #888780; font-family: inherit; }
+.tree-sub-children { overflow: hidden; max-height: 0; transition: max-height 0.15s ease; }
+.tree-sub-children.open { max-height: 600px; }
+
+.tree-leaf { display: flex; align-items: center; padding: 5px 8px 5px 34px; font-size: 11.5px; color: #5f5e5a; cursor: pointer; border-radius: 6px; transition: all 0.1s; border: none; background: none; width: 100%; text-align: left; font-family: inherit; gap: 5px; }
+.tree-leaf::before { content: '—'; font-size: 9px; color: #d3d1c7; flex-shrink: 0; }
+.tree-leaf:hover { background: #f5f4f0; color: #1a1a18; }
+.tree-leaf.active { background: #E6F1FB; color: #185FA5; font-weight: 700; }
+.tree-leaf-l3 { padding-left: 48px; }
+
+.nav-footer { padding: 10px 8px; border-top: 0.5px solid #e0dfd6; flex-shrink: 0; }
+.logout-btn { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 7px; cursor: pointer; font-size: 12px; color: #888780; border: none; background: none; width: 100%; font-family: inherit; transition: all 0.1s; }
+.logout-btn:hover { background: #f5f4f0; color: #1a1a18; }
+
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar { padding: 13px 22px; border-bottom: 0.5px solid #e0dfd6; display: flex; align-items: center; justify-content: space-between; background: #fff; flex-shrink: 0; }
+.page-title { font-size: 15px; font-weight: 700; color: #1a1a18; }
+.page-sub { font-size: 11px; color: #888780; margin-top: 2px; }
+.content { flex: 1; overflow-y: auto; padding: 22px; }
+
+.badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
+.b-blue { background: #E6F1FB; color: #185FA5; }
+.b-green { background: #EAF3DE; color: #3B6D11; }
+.b-amber { background: #FAEEDA; color: #854F0B; }
+.b-red { background: #FCEBEB; color: #A32D2D; }
+.b-gray { background: #F1EFE8; color: #5F5E5A; }
+.b-purple { background: #EEEDFE; color: #534AB7; }
+.b-teal { background: #E1F5EE; color: #0F6E56; }
+
+.sec-label { font-size: 11px; font-weight: 700; color: #888780; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.divider { height: 0.5px; background: #e0dfd6; margin: 20px 0; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.dash-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.dash-card { background: #fff; border: 0.5px solid #e0dfd6; border-radius: 12px; padding: 16px; cursor: pointer; transition: border-color 0.12s; }
+.dash-card:hover { border-color: #b4b2a9; }
+.dash-card-title { font-size: 13px; font-weight: 700; color: #1a1a18; margin-bottom: 5px; }
+.dash-card-desc { font-size: 12px; color: #5f5e5a; line-height: 1.6; }
+.dash-card-meta { margin-top: 10px; }
+
+.video-card { background: #fff; border: 0.5px solid #e0dfd6; border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.12s; }
+.video-card:hover { border-color: #b4b2a9; }
+.video-thumb { height: 86px; display: flex; align-items: center; justify-content: center; position: relative; }
+.play-btn { width: 34px; height: 34px; background: #fff; border-radius: 50%; border: 0.5px solid #d3d1c7; display: flex; align-items: center; justify-content: center; }
+.play-tri { width: 0; height: 0; border-left: 11px solid #378ADD; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+.video-dur { position: absolute; bottom: 7px; right: 9px; font-size: 10px; background: rgba(0,0,0,0.45); color: #fff; padding: 2px 5px; border-radius: 3px; font-weight: 700; }
+.video-info { padding: 10px 13px 12px; }
+.video-title { font-size: 12px; font-weight: 700; color: #1a1a18; margin-bottom: 3px; line-height: 1.4; }
+.video-meta { font-size: 11px; color: #888780; }
+
+.article { background: #fff; border: 0.5px solid #e0dfd6; border-radius: 12px; padding: 22px 24px; }
+.article h3 { font-size: 14px; font-weight: 700; color: #1a1a18; margin: 18px 0 8px; border-left: 3px solid #378ADD; padding-left: 10px; }
+.article h3:first-child { margin-top: 0; }
+.article p { font-size: 13px; color: #2c2c2a; line-height: 1.8; margin-bottom: 10px; }
+.article ul, .article ol { padding-left: 20px; margin-bottom: 10px; }
+.article li { font-size: 13px; color: #2c2c2a; line-height: 1.8; }
+.article .note { background: #FAEEDA; border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #854F0B; line-height: 1.7; margin: 12px 0; }
+.article .important { background: #FCEBEB; border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #A32D2D; line-height: 1.7; margin: 12px 0; font-weight: 600; }
+.article .info { background: #E6F1FB; border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #185FA5; line-height: 1.7; margin: 12px 0; }
+.level-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; }
+.level-table th { background: #f5f4f0; padding: 8px 10px; text-align: left; border: 0.5px solid #e0dfd6; font-weight: 700; color: #5f5e5a; }
+.level-table td { padding: 8px 10px; border: 0.5px solid #e0dfd6; vertical-align: top; line-height: 1.6; color: #2c2c2a; }
+.lvl { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+
+/* ドキュメント行 */
+.doc-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 0.5px solid #e0dfd6; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.12s, background 0.12s; background: #fff; }
+.doc-row:hover { border-color: #b4b2a9; background: #fafaf8; }
+.doc-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.doc-body { flex: 1; min-width: 0; }
+.doc-name { font-size: 13px; font-weight: 700; color: #1a1a18; }
+.doc-info { font-size: 11px; color: #888780; margin-top: 2px; }
+
+/* 入試問題タブ */
+:root { --c-sec: #888780; }
+.mondai-tab { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; border: 0.5px solid #d3d1c7; background: #fff; color: #5f5e5a; transition: all 0.1s; }
+.mondai-tab:hover { background: #f5f4f0; }
+.mondai-tab.active { background: #1a1a18; color: #fff; border-color: #1a1a18; }
+.mondai-panel { display: none; }
+.mondai-panel.active { display: block; }
+
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-brand-name">明光義塾 西八王子いちょう通り教室</div>
+      <div class="login-brand-title">講師ポータル</div>
+    </div>
+    <div class="login-field">
+      <label class="login-label">ユーザーID</label>
+      <input class="login-input" id="lid" type="text" placeholder="IDを入力">
+    </div>
+    <div class="login-field">
+      <label class="login-label">パスワード</label>
+      <input class="login-input" id="lpw" type="password" placeholder="パスワードを入力">
+    </div>
+    <button class="login-btn" onclick="doLogin()">ログイン</button>
+    <div class="login-error" id="lerr">IDまたはパスワードが正しくありません。</div>
+  </div>
+</div>
+
+<div id="portal-screen">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-eyebrow">明光義塾 西八王子いちょう通り</div>
+      <div class="logo-title">講師ポータル</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">
+        <div class="nav-label">ホーム</div>
+        <button class="nav-btn active" onclick="sp('top',this)"><span class="nicon">▦</span>ダッシュボード</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">基本理念・ルール</div>
+        <button class="nav-btn" onclick="sp('about',this)"><span class="ndot"></span>教室概要・理念</button>
+        <button class="nav-btn" onclick="sp('mindset',this)"><span class="ndot"></span>心構え・コンプライアンス</button>
+        <button class="nav-btn" onclick="sp('guideline',this)"><span class="ndot"></span>講師―生徒間ガイドライン</button>
+        <button class="nav-btn" onclick="sp('rules',this)"><span class="ndot"></span>教室のルール</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">業務マニュアル</div>
+        <button class="nav-btn" onclick="sp('tel',this)"><span class="ndot"></span>電話対応</button>
+        <button class="nav-btn" onclick="sp('visitor',this)"><span class="ndot"></span>来客対応</button>
+        <button class="nav-btn" onclick="sp('absent',this)"><span class="ndot"></span>教室長不在時の対応</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">授業・教材</div>
+        <button class="nav-btn" onclick="sp('policy',this)"><span class="ndot"></span>授業運営方針</button>
+        <!-- 学力と教材 ツリー -->
+        <div class="tree-group">
+          <button class="tree-parent" onclick="tt('tk',this)">
+            <span class="tree-arrow" id="tk-a">▶</span>
+            <span class="tree-parent-label">学力と教材</span>
+          </button>
+          <div class="tree-children" id="tk">
+            <!-- 小学生 -->
+            <div class="tree-sub-group">
+              <button class="tree-sub-parent" onclick="tt('ts',this)">
+                <span class="tree-sub-arrow" id="ts-a">▶</span>
+                <span class="tree-sub-label">小学生教材</span>
+              </button>
+              <div class="tree-sub-children" id="ts">
+                <!-- 一般生 -->
+                <div style="padding-left:10px;">
+                  <button class="tree-sub-parent" onclick="tt('ti',this)">
+                    <span class="tree-sub-arrow" id="ti-a">▶</span>
+                    <span class="tree-sub-label">一般生教材</span>
+                  </button>
+                  <div class="tree-sub-children" id="ti">
+                    <button class="tree-leaf tree-leaf-l3" onclick="sp('meiko-work',this)">明光式！ワーク</button>
+                    <button class="tree-leaf tree-leaf-l3" onclick="sp('kyokasho-drill',this)">教科書ドリル（漢字・計算）</button>
+                  </div>
+                </div>
+                <!-- 中学受験 -->
+                <div style="padding-left:10px;">
+                  <button class="tree-sub-parent" onclick="tt('tj',this)">
+                    <span class="tree-sub-arrow" id="tj-a">▶</span>
+                    <span class="tree-sub-label">中学受験生教材</span>
+                  </button>
+                  <div class="tree-sub-children" id="tj">
+                    <button class="tree-leaf tree-leaf-l3" onclick="sp('chuuju',this)">中学受験新演習</button>
+                    <button class="tree-leaf tree-leaf-l3" onclick="sp('shinsho',this)">新小学問題集</button>
+                    <button class="tree-leaf tree-leaf-l3" onclick="sp('hyojun',this)">標準新演習</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 中学生 -->
+            <div class="tree-sub-group">
+              <button class="tree-sub-parent" onclick="tt('tc',this)">
+                <span class="tree-sub-arrow" id="tc-a">▶</span>
+                <span class="tree-sub-label">中学生教材</span>
+              </button>
+              <div class="tree-sub-children" id="tc">
+                <button class="tree-leaf" onclick="sp('iwork',this)">iワーク</button>
+                <button class="tree-leaf" onclick="sp('foresta',this)">フォレスタ</button>
+                <button class="tree-leaf" onclick="sp('koshu',this)">講習テキストマスターα/β</button>
+              </div>
+            </div>
+            <!-- 高校生 -->
+            <div class="tree-sub-group">
+              <button class="tree-leaf" onclick="sp('koukou',this)">高校生教材</button>
+            </div>
+          </div>
+        </div>
+        <button class="nav-btn" onclick="sp('flow',this)"><span class="ndot"></span>振り返り授業の流れ</button>
+        <button class="nav-btn" onclick="sp('3kinds',this)"><span class="ndot"></span>明光の3つの授業</button>
+        <button class="nav-btn" onclick="sp('clamas',this)"><span class="ndot"></span>ClaMaS 入力ガイド</button>
+        <button class="nav-btn" onclick="sp('roleplay',this)"><span class="ndot"></span>授業ロープレ</button>
+        <button class="nav-btn" onclick="sp('quiz',this)"><span class="ndot"></span>小テスト</button>
+        <button class="nav-btn" onclick="sp('moshi',this)"><span class="ndot"></span>模試の返却・FB</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">受験情報</div>
+        <button class="nav-btn" onclick="sp('koko',this)"><span class="ndot"></span>高校受験情報</button>
+        <button class="nav-btn" onclick="sp('daigaku',this)"><span class="ndot"></span>大学受験情報</button>
+        <button class="nav-btn" onclick="sp('chugaku',this)"><span class="ndot"></span>中学受験情報</button>
+      </div>
+
+    </nav>
+    <div class="nav-footer">
+      <button class="logout-btn" onclick="doLogout()"><span>⎋</span> ログアウト</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="page-title" id="ptitle">ダッシュボード</div>
+        <div class="page-sub" id="psub">明光義塾 西八王子いちょう通り教室 講師ポータル</div>
+      </div>
+    </div>
+    <div class="content">
+
+      <!-- ダッシュボード -->
+      <div class="panel active" id="p-top">
+        <div class="sec-label">マニュアルカテゴリ</div>
+        <div class="dash-grid">
+          <div class="dash-card" onclick="sp('mindset',null)"><div class="dash-card-title">📖 基本理念・ルール</div><div class="dash-card-desc">教室コンセプト・心構え・コンプライアンス・3Cの柱</div><div class="dash-card-meta"><span class="badge b-blue">必読</span></div></div>
+          <div class="dash-card" onclick="sp('tel',null)"><div class="dash-card-title">📞 業務マニュアル</div><div class="dash-card-desc">電話対応・来客対応・教室長不在時の鍵開け閉め手順</div><div class="dash-card-meta"><span class="badge b-green">3 項目</span></div></div>
+          <div class="dash-card" onclick="sp('flow',null)"><div class="dash-card-title">🎓 授業・教材</div><div class="dash-card-desc">教材ガイド・振り返り授業・ClaMaS入力・ロープレ</div><div class="dash-card-meta"><span class="badge b-amber">全学年対応</span></div></div>
+          <div class="dash-card" onclick="sp('koko',null)"><div class="dash-card-title">✏️ 受験情報</div><div class="dash-card-desc">高校・大学・中学の受験制度・入試対策・近隣学校情報</div><div class="dash-card-meta"><span class="badge b-purple">3 カテゴリ</span></div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="sec-label">🔗 クイックリンク</div>
+        <div class="doc-row" onclick="window.open('https://admin.meikonet.net/login','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📱</div>
+          <div class="doc-body"><div class="doc-name">明光義塾アプリ塾生証</div><div class="doc-info">admin.meikonet.net</div></div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://next.metisnet.jp/net-client/login','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📊</div>
+          <div class="doc-body"><div class="doc-name">ClaMaS</div><div class="doc-info">next.metisnet.jp</div></div>
+          <span class="badge b-green">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://metisnet.jp/MEIKO/CMON/01/CMON0101D.aspx','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">🖥️</div>
+          <div class="doc-body"><div class="doc-name">Metis Network</div><div class="doc-info">metisnet.jp</div></div>
+          <span class="badge b-amber">開く</span>
+        </div>
+
+      </div>
+
+      <!-- 教室概要 -->
+      <div class="panel" id="p-about"><div class="article">
+        <h3>教室概要</h3>
+        <p>名称：明光義塾 西八王子いちょう通り教室<br>住所：〒193-0835 東京都八王子市千人町1-5-15 ライオンズプラザ西八王子108号室<br>電話：042-666-3355 ／ 席数：18席（自習席：6席）／ 教室長：石川 佑真</p>
+        <h3>教育理念</h3>
+        <p><strong>個別指導による自立学習を通じて、創造力豊かで自立心に富んだ21世紀社会の人材を育成する</strong></p>
+        <ul><li>勉強の仕方を身につける授業（＝自立学習）</li><li>将来の夢をサポートすること（＝自己実現）</li></ul>
+        <h3>教室コンセプト</h3>
+        <p>子どもが本音を出せる「第3の居場所」</p>
+        <ul><li><strong>安心して"弱さ"を出せる場所</strong>：「わからない」が言える、失敗しても大丈夫な安全状態</li><li><strong>"どう勉強するか"を一緒に考える場所</strong>：生徒の理解度・性格・生活に合わせた学習</li><li><strong>人生の話ができる場所</strong>：将来・進路・部活・友人関係まで</li></ul>
+        <h3>教室モットー</h3>
+        <ul><li><strong>主体性</strong>：常に「自分ならどう動くか？」を考えて行動する</li><li><strong>個性発揮</strong>：自分の強みを理解し、伸ばしていく</li><li><strong>他者配慮</strong>：相手の立場から物事を考える</li></ul>
+      </div></div>
+
+      <!-- 心構え -->
+      <div class="panel" id="p-mindset"><div class="article">
+        <h3>教育者としての心構え</h3>
+        <ul><li>約束を守る、社会のルールを守る</li><li>報告・連絡・相談をする</li><li>相手の気持ちに寄り添った対応をする</li><li>品行方正な立ち居振る舞い、道徳観を持つ</li></ul>
+        <div class="info"><strong>自責思考で考える</strong>：問題が起こったとき、原因が自分にあるとして考える。行動が早ければ多くの経験を積めるので成長できる。</div>
+        <h3>サービス業としての立ち居振る舞い</h3>
+        <ul><li>常に相手の立場に立って考える（生徒・保護者はお客様）</li><li>職場に私情を挟まない</li><li>教室環境の美化に努める</li><li>お月謝に見合った授業内容を提供する</li></ul>
+        <h3>教室運営の3つの柱（3C）</h3>
+        <ul><li><strong>コミュニケーション</strong>：生徒理解・成長を促す声掛け・承認</li><li><strong>コンプライアンス</strong>：ルール・法令遵守・倫理観の徹底</li><li><strong>クリンリネス</strong>：整理整頓・清潔感の維持</li></ul>
+        <h3>コンプライアンス違反を防ぐために</h3>
+        <ul><li><strong>個人情報の漏洩防止</strong>：外に持ち出さない、見える場所に置かない</li><li><strong>著作権侵害防止</strong>：原則、教材コピーはしない</li><li><strong>賃金未払い防止</strong>：事務勤務申請書を正しく記入、勤怠一覧を確認</li><li><strong>盗撮防止</strong>：講師スペース以外でスマホを使用しない</li><li><strong>ハラスメント防止</strong>：パワハラ・モラハラ・セクハラをしない</li></ul>
+        <div class="important">スマホは授業スペースに持ち込まないこと！ロッカーに保管する。SNSへの教室・生徒に関する書き込みは一切禁止。</div>
+      </div></div>
+
+      <!-- ガイドライン -->
+      <div class="panel" id="p-guideline"><div class="article">
+        <h3>禁止事項（卒業した生徒も含む）</h3>
+        <div class="important">①講師－生徒間のモノの貸し借り禁止<br>②メールアドレス・携帯番号など連絡先の交換禁止<br>③講師－生徒間の交際禁止<br>④教室以外でのコンタクト禁止<br>⑤教室を介さない個人的連絡の禁止<br>⑥明光義塾について掲示板・ブログへの書き込み禁止<br>⑦明光義塾についてSNSへの書き込み禁止<br>⑧生徒への物理的な接触禁止（どんな理由があっても体に触れないこと）</div>
+        <h3>時代に合った対応を</h3>
+        <p>「なんでわからないんだ！」などの怒鳴り、体への接触は全て禁止です。生き死について、宗教・政治・性別・人格について、販売や営業する行為について話題に出すことは禁止です。</p>
+        <div class="note">未成年との交際は「青少年保護育成条例」違反。インターネット上にUPされると、デジタルタトゥーとして永遠に残ります。</div>
+      </div></div>
+
+      <!-- 教室ルール -->
+      <div class="panel" id="p-rules"><div class="article">
+        <h3>服装について</h3>
+        <ul><li>オフィスカジュアル。アクセサリーはワンポイントのみ可（髪色トーン：3〜10）</li><li><strong>男性</strong>：ボトムスはチノパン/スラックス。トップスはワイシャツ/ポロシャツ。デニム・パーカー・Tシャツ1枚はNG</li><li><strong>女性</strong>：ボトムスはパンツ/ミディアム〜ロングスカート。ミニスカート・ジーンズ・Tシャツ1枚はNG</li></ul>
+        <h3>シフトについて</h3>
+        <ul><li>提出期限：毎月15日まで（アプリ講師証にて）</li><li>シフト開示：毎月25日</li><li>繁忙期（7〜8月・12〜1月）は特に協力をお願いします</li></ul>
+        <h3>出退勤について</h3>
+        <ul><li>授業開始20分前には出勤する</li><li>遅刻しそうな場合はわかった時点で教室に電話すること</li><li>授業報告がすべて済んだ段階で速やかに退勤する</li></ul>
+        <h3>教室会議・研修</h3>
+        <p>年6回の教室会議（5月・6月・10月・11月・1月・3月）と明光エンカレッジ（本部主催研修）があります。</p>
+      </div></div>
+
+      <!-- 電話対応 -->
+      <div class="panel" id="p-tel"><div class="article">
+        <h3>基本姿勢</h3>
+        <ul><li>ゆっくりはっきり話す</li><li>通話記録簿にメモを取る</li><li>内部用語（「Bコマ」「テ対」など）は使わない</li></ul>
+        <p>出方：「お電話ありがとうございます。明光義塾西八王子いちょう通り教室、講師の●●でございます。」</p>
+        <h3>振替連絡</h3>
+        <div class="info">ポイント：振替元の日付・コマと振替先の日付・コマを必ず確認する</div>
+        <h3>欠席連絡</h3>
+        <div class="note">ポイント：当日欠席は原則、振替対象外であることを伝えること</div>
+        <h3>電話をかける場合</h3>
+        <p>「いつもお世話になっております。明光義塾西八王子いちょう通り教室、講師の●●でございます。」</p>
+        <ul><li><strong>遅刻連絡</strong>：事前に教室長・他講師が連絡を受けていないか確認してから架電</li><li><strong>居残り連絡</strong>：「〜してもよろしいでしょうか？」と許可を取る姿勢で</li><li><strong>留守電</strong>：必ず留守電を残して用件を伝える</li></ul>
+        <h3>その他</h3>
+        <ul><li><strong>社内電話</strong>：「お疲れ様です。西八王子いちょう通り教室、講師の●●です。」</li><li><strong>外部からの問い合わせ</strong>：基本は教室長に投げる。学年は必ず確認</li><li><strong>生徒本人から欠席連絡</strong>：必ず保護者に確認の電話を入れる</li><li><strong>保護者からのクレーム</strong>：積極的に聞く姿勢を示し、速やかに教室長につなぐ</li></ul>
+      </div></div>
+
+      <!-- 来客対応 -->
+      <div class="panel" id="p-visitor"><div class="article">
+        <h3>基本姿勢</h3>
+        <p>入口にお客様が来たら教室にいる全員が元気に挨拶する。授業中であっても挨拶は必ずする。</p>
+        <h3>来客別の対応</h3>
+        <ul><li><strong>生徒</strong>：「こんにちは！」→座席表で座る場所を確認（授業か自習かも確認）</li><li><strong>保護者</strong>：来塾目的を確認。お迎えの際は担当講師が授業報告をする</li><li><strong>業者</strong>：受け取った講師自身がサインをする。郵便の集荷はゆうパック伝票＋ビズカードを渡す</li><li><strong>近隣学校の先生</strong>：不在時は名刺を1枚渡し、資料は預かって教室長に渡す</li><li><strong>外部保護者（飛び込み）</strong>：「来塾受付表」に学年・名前・連絡先を記入してもらう</li></ul>
+      </div></div>
+
+      <!-- 教室長不在 -->
+      <div class="panel" id="p-absent"><div class="article">
+        <h3>鍵開けの手順</h3>
+        <ol><li>前日までに教室長から教室の鍵をもらう</li><li>当日、教室入口の扉を開錠する</li><li>注水台・のぼり・立て看板を外に出す</li><li>電気をつける</li><li>アプリ塾生証のチャットを確認し、振替・欠席連絡のみ返信する</li><li>教室長へ鍵開け完了を報告（アプリチャットでOK）</li><li>鍵は教室長が来るまで持っておき、手渡しで返却</li></ol>
+        <h3>鍵閉めの手順</h3>
+        <ol><li>タブレット保管庫にすべてのタブレットが収納されているか確認（教室長タブレット（青）はしまわなくてOK）</li><li>授業ブースと自習席の椅子をすべて机の上にあげる</li><li>のぼり・注水台・立て看板を教室内にしまう</li><li>電気を消す</li><li>教室の入口を施錠する</li><li>教室長に施錠完了を連絡（アプリチャットでOK）</li><li>通話記録簿・チャット内容を写真で教室長に共有する</li><li>鍵は手渡しで教室長に返却</li></ol>
+      </div></div>
+
+      <!-- 振り返り授業 -->
+      <div class="panel" id="p-flow"><div class="article">
+        <h3>振り返り授業とは</h3>
+        <p>生徒が学んだことを振り返り、わかったこと・わからなかったことを自分の言葉で表現する授業。生徒主体の学びを実現する。</p>
+        <h3>授業の流れ</h3>
+        <ol><li><strong>授業開始</strong>：前回の授業内容と学校の授業内容を確認</li><li><strong>確認テスト</strong>：英語は単語テスト、その他は教材付属の確認テスト（合格点70点。未満は次回再テスト）</li><li><strong>単元導入</strong>：重要事項を解説し、生徒に言わせて確認する</li><li><strong>問題演習</strong>：正答率70%になるよう問題を選定（蛍光ペンで選定問題に色付け）</li><li><strong>まとめ</strong>：重要事項を言わせて確認。振り返りノートを記入</li><li><strong>宿題提示</strong>：1週間で見開き2〜3ページ。主教材＋副教材から必ず出すこと</li></ol>
+        <div class="note">NEO・BASICは「10問中7問正解」するように選定。STANDARD・PROGRESSは「10問中3問間違える」ように選定。</div>
+        <h3>授業共通事項</h3>
+        <ul><li>問題はすべてノートに解く（教材への書き込みはNG）</li><li>残り15分は振り返りの時間（△×の問題の解き直し＋振り返りノート記入）</li><li>宿題は次の授業までの日数×0.5ページ以上</li><li>宿題忘れ2回目以降は居残り実施</li></ul>
+      </div></div>
+
+      <!-- 3つの授業 -->
+      <div class="panel" id="p-3kinds"><div class="article">
+        <h3>通常授業（予習型）</h3>
+        <ul><li>学校の先取りをして基礎基本を定着させる</li><li>定期テスト1か月前までにテスト範囲を1周する</li></ul>
+        <h3>テスト対策授業（定期テスト1か月前より）</h3>
+        <ul><li>定期テスト範囲の復習と応用発展問題の対策（復習型）</li><li>テスト前のみ、通塾科目を増やしたり未通塾科目を単体追加できる</li></ul>
+        <h3>期別講習（7〜8月・12〜1月・3〜4月）</h3>
+        <ul><li>その時期までに習った単元の総復習（復習型）</li><li>講習用教材を使用する。カリキュラムは生徒ごとに設定</li></ul>
+      </div></div>
+
+      <!-- 授業運営方針 -->
+      <div class="panel" id="p-policy"><div class="article">
+        <h3>授業に入る際の大事なこと</h3>
+        <ul><li>生徒の人生に影響を与える覚悟と責任を持つ</li><li>承認することが第一。甘やかさず、締めるべき時は締める</li><li>ノートは必ず使わせる（ノート指導も勉強法の一つ）</li><li>教えるときは図や文字を書いて教える（口頭のみはNG、特に数学は図式化）</li><li>授業中に担当を離れない（コピーは授業準備時に済ませる）</li><li>座って授業する（目線を合わせることで説得力が増す）</li><li>90分で2〜3単元進める（柔軟に対応）</li></ul>
+        <h3>学力4段階レベル（小学生）</h3>
+        <table class="level-table">
+          <tr><th>レベル</th><th>特徴・目的</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span></td><td>集中力がない。学校テスト80点未満。学校授業に追いつくことが目的</td></tr>
+          <tr><td><span class="lvl b-blue">BASIC</span></td><td>集中力は標準的。学校テスト80〜90点。学校テスト100点が目的</td></tr>
+          <tr><td><span class="lvl b-amber">STANDARD</span></td><td>中学受験をふんわり考えている。偏差値40〜50目安</td></tr>
+          <tr><td><span class="lvl b-green">PROGRESS</span></td><td>中学受験をする生徒。偏差値55〜60目安。学校内容は一切触れない</td></tr>
+        </table>
+        <h3>学力4段階レベル（中学生）</h3>
+        <table class="level-table">
+          <tr><th>レベル</th><th>特徴・目的</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span></td><td>学校成績1〜2。前学年までの遅れあり。学校授業に追いつくことが目的</td></tr>
+          <tr><td><span class="lvl b-blue">BASIC（Yコース）</span></td><td>成績2〜3。偏差値35〜45。定期テストで平均点取得が目的</td></tr>
+          <tr><td><span class="lvl b-amber">STANDARD（Xコース）</span></td><td>成績3〜4。偏差値50〜55。学校テストで80点取得が目的</td></tr>
+          <tr><td><span class="lvl b-green">PROGRESS</span></td><td>成績4〜5。偏差値55〜60以上。定期テスト100点満点が目的</td></tr>
+        </table>
+      </div></div>
+
+      <!-- ClaMaS -->
+      <div class="panel" id="p-clamas"><div class="article">
+        <h3>授業時の入力項目</h3>
+        <ul><li>出欠（出席・欠席・遅刻）、宿題実施状況</li><li>学習進捗・単元管理、説明できた数、〇△×の数</li><li>次回までの宿題、次回開始ページ</li><li>講師からのコメント（保護者に送信される）</li><li>講師共有コメント（保護者には非表示・引き継ぎ用）</li><li>振り返りノートの画像</li></ul>
+        <h3>講師コメントの書き方（超重要）</h3>
+        <div class="note">講師コメントは保護者への授業報告です。書いた内容がそのまま保護者に届くため、表現は慎重に。</div>
+        <div class="info" style="white-space:pre-line; font-family: inherit;">【確認テスト】
+＜単元＞
+＜正答率＞
+
+【本日の授業について】
+＜単元名＞
+＜担当講師より＞</div>
+        <h3>振り返りノートの撮影</h3>
+        <ul><li>画面いっぱいに撮影し、向きや大きさを確認してからアップする</li><li>必ず机の上で撮影。ノート以外の教材・筆記用具が映らないようにする</li></ul>
+      </div></div>
+
+      <!-- ロープレ -->
+      <div class="panel" id="p-roleplay"><div class="article">
+        <h3>ロープレ①：中学生編</h3>
+        <p>設定時間：ロープレ45分、フィードバック15分</p>
+        <ul><li><strong>中2男子（中村大輔くん）</strong>／数学（一次関数）／BASIC（iワーク）／前回テスト40点</li><li><strong>中2女子（佐藤志保さん）</strong>／英語（不定詞）／STANDARD（iワーク）／前回テスト75点</li></ul>
+        <h3>ロープレ②：小学生編</h3>
+        <p>設定時間：ロープレ45分、フィードバック15分</p>
+        <ul><li><strong>小4男子（市川裕一郎くん）</strong>／国語（説明的文章）／BASIC（明光式!ワーク）／字が汚い</li><li><strong>小5女子（山本遥さん）</strong>／算数（速さ）／BASIC（明光式!ワーク）／わからなくても言えない</li></ul>
+        <h3>ロープレ共通目標</h3>
+        <ul><li>振り返り授業の流れを理解する</li><li>1対2の授業を円滑に回せるようにする</li><li>楽しく授業する</li></ul>
+      </div></div>
+
+      <!-- 小テスト -->
+      <div class="panel" id="p-quiz"><div class="article">
+        <h3>小テストについて</h3>
+        <div class="info">確認テストは授業のはじめに毎回実施します。合格点は<strong>70点</strong>。未達の場合は次回再テストです。</div>
+        <ul>
+          <li><strong>英語</strong>：前回授業で出した単語宿題の範囲から出題</li>
+          <li><strong>その他教科</strong>：教材付属の確認テストを使用</li>
+        </ul>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#378ADD;">🔗 小テストジェネレーター</h3>
+        <div class="info" style="margin-bottom:12px;">中学生・高校生の英単語テスト作成に使用する外部サービスです。クリックして開きます。</div>
+        <div class="doc-row" onclick="window.open('https://www.printgenerator.net/book_index?onlyMyBook=yes','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">✏️</div>
+          <div class="doc-body">
+            <div class="doc-name">小テストジェネレーター</div>
+            <div class="doc-info">printgenerator.net · 英単語テスト作成（中学生・高校生）</div>
+          </div>
+          <span class="badge b-blue">開く</span>
+        </div>
+      </div></div>
+
+      <!-- 教材ページ群 -->
+      <div class="panel" id="p-meiko-work"><div class="article"><h3>明光式！ワーク（小学生 NEO・BASIC）</h3><div class="info">対象：NEO・BASICレベルの小学生（一般生）の主教材</div><p><strong>国語</strong>：授業では（2）読解問題のみ実施。漢字は宿題で実施し、意味調べがあるページは必ず自宅でやらせる。</p><p><strong>算数</strong>：「例題」と「たしかめよう」の構成。原則「例題」から入る。「たしかめよう」は授業進度に応じて問題を抜粋して進める。</p></div></div>
+      <div class="panel" id="p-kyokasho-drill"><div class="article"><h3>教科書ドリル（漢字・計算）（小学生 NEO・BASIC）</h3><div class="info">対象：NEO・BASICレベルの小学生の副教材</div><p>副教材として使用。主教材（明光式！ワーク）と合わせて宿題で活用する。</p></div></div>
+      <div class="panel" id="p-chuuju"><div class="article"><h3>中学受験新演習（小学生 PROGRESS）</h3><div class="info">対象：中学受験をする小学生（PROGRESSレベル）の主教材</div><p><strong>国語・理科・社会</strong>：原則すべての問題を扱い、ページ通り進める。進みが遅い場合は抜粋して予定進度を守る。</p><p><strong>算数</strong>：「チャレンジ問題」以外はすべて扱う。進みが遅い場合は抜粋して進める。</p></div></div>
+      <div class="panel" id="p-shinsho"><div class="article"><h3>新小学問題集（小学生 STANDARD）</h3><div class="info">対象：中学受験生（STANDARDレベル）の主教材</div><p><strong>国語・算数・理科・社会</strong>：原則すべての問題を扱い、ページ通り進める。進みが遅い場合は抜粋して予定進度を守る。</p></div></div>
+      <div class="panel" id="p-hyojun"><div class="article"><h3>標準新演習（小学生 STANDARD）</h3><div class="info">対象：STANDARDレベルの小学生</div><p><strong>国語</strong>：授業では「練習問題」を扱い「例題」は宿題。「ジャンプアップ」「まとめ」は授業で実施。</p><p><strong>算数</strong>：授業では「例題」の解説後に「練習問題A」を抜粋して演習。「確認問題」は宿題。「まとめの問題A」は全員、「B」は余力のある生徒のみ。</p></div></div>
+      <div class="panel" id="p-iwork"><div class="article"><h3>iワーク（中学生 BASIC・STANDARD）</h3><div class="info">対象：BASIC・STANDARDレベルの中学生の主教材</div><p><strong>英語</strong>：★マーク中心に扱う。「新出単語」→「基本問題」→「練習問題」の順で進める。</p><p><strong>数学</strong>：「例題」→「基本問題」→「標準問題」の順。例題が多いため★マーク中心に扱う。</p><p><strong>国語</strong>：「学習のポイント」を解説し「標準問題」の演習を行う。「漢字の学習」は宿題で次回テスト。</p><p><strong>理科・社会</strong>：原則すべて扱う。時間がない場合は★マーク中心。</p></div></div>
+      <div class="panel" id="p-foresta"><div class="article"><h3>フォレスタ（中学生 NEO）</h3><div class="info">対象：NEOレベルの中学生の主教材</div><p><strong>英語</strong>：授業では「Warm Up」→「Try」まで。「Key Words」は宿題で次回テスト。</p><p><strong>数学</strong>：「Warm Up」の例題で解き方を確認し「Try」の問題演習。「Exercise」は宿題。</p><p><strong>理科・社会</strong>：「Warm Up」で用語と説明を確認し「Try」の演習。「Exercise」は宿題。</p></div></div>
+      <div class="panel" id="p-koshu"><div class="article"><h3>講習テキストマスターα/β（中学生 副教材）</h3><div class="info">通常授業では主に宿題として使用する教材</div><p>レベルの高い生徒には「標準問題」「長文読解B」などを中心に。レベルが不安定な生徒には「例題」「基本問題」などの基礎問題を中心に出して正答率をコントロールする。</p><p>講習時期は、プラン表に書かれた問題を中心に行う。</p></div></div>
+      <div class="panel" id="p-koukou"><div class="article">
+        <h3>高校生教材について</h3>
+        <div class="info">高校生の教材は生徒ごとに異なるため、完全個別対応です。</div>
+        <h3>①明光オリジナル教材を使う生徒</h3>
+        <ul>
+          <li>学校進度に合わせて授業を実施する</li>
+          <li>原則「予習型」で進める</li>
+          <li>宿題として次回授業時までに学校進度の1単元先まで教材を進めてもらう</li>
+          <li>授業では、予習してきた内容から抜粋して単元の解説・演習を行う</li>
+        </ul>
+        <h3>②その他市販教材・学校教材で進めていく生徒</h3>
+        <ul>
+          <li>教材ごとに決められた進め方をもとに、予習型で進めていく</li>
+          <li>授業では、予習してきた内容から抜粋して単元の解説・演習を行う</li>
+        </ul>
+      </div></div>
+
+      <!-- 高校受験 -->
+      <div class="panel" id="p-koko"><div class="article">
+        <h3>都立入試の仕組み</h3>
+        <p><strong>推薦入試</strong>（毎年1/26〜1/27）：一般推薦・文化スポーツ等特別推薦・理数等特別推薦の3種類</p>
+        <p><strong>一般入試</strong>（毎年2/21）：調査書(300点)：学力検査(700点)＝3：7。ESAT-J（英語スピーキングテスト）20点満点が調査書に追加。</p>
+        <p><strong>調査書計算式</strong>：（英+数+国+理+社）×1＋（音+美+保体+技家）×2＝65点満点</p>
+        <h3>各教科の入試傾向</h3>
+        <ul><li><strong>国語</strong>：漢字10問・文学的文章1問・説明的文章1問・作文1問（200字）・融合文5問</li><li><strong>数学</strong>：小問集合9問・規則性2問・関数3問・平面図形3問・空間図形2問</li><li><strong>英語</strong>：リスニング2問・資料の読解3問・対話文1問・物語文1問</li><li><strong>理科</strong>：小問集合7問・レポート問題4問・地学3〜4問・生物3〜4問</li><li><strong>社会</strong>：小問集合3問・世界地理3問・日本地理3問・歴史4問・公民2問</li></ul>
+        <h3>近隣の都立高校</h3>
+        <p><strong>自校作成校</strong>：八王子東、立川、国分寺、国立 など</p>
+        <p><strong>共通問題実施校</strong>：町田、日野台、南平、調布北、翔陽、府中、松が谷、富士森、小川、片倉、福生、八王子北 など</p>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#639922;">📄 令和8年度 都立入試問題</h3>
+        <div class="info" style="margin-bottom:14px;">2026年2月実施。各教科の問題をタブで確認できます。</div>
+
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1NdwrJdMkPGffuu5pWTOhGlj4p6wmBe7H/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#FBEAF0;">📄</div>
+          <div class="doc-body"><div class="doc-name">令和8年度 都立入試問題｜国語</div><div class="doc-info">Google Drive · 2026年2月実施</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1P4ZViNrBEE9Ic_cMn2My_luMZIGHVQlm/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📄</div>
+          <div class="doc-body"><div class="doc-name">令和8年度 都立入試問題｜数学</div><div class="doc-info">Google Drive · 2026年2月実施</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1RGd3LFmIeKcGZ_JmkMLDXlBkwNzXih1e/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📄</div>
+          <div class="doc-body"><div class="doc-name">令和8年度 都立入試問題｜英語</div><div class="doc-info">Google Drive · 2026年2月実施</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1ifr-k5TX2sHsJb7PHuEAzwlSNQh4RwCs/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">📄</div>
+          <div class="doc-body"><div class="doc-name">令和8年度 都立入試問題｜理科</div><div class="doc-info">Google Drive · 2026年2月実施</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1sChiPGGGmvkBZATaO6uGY5MVG7VNaunn/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#E1F5EE;">📄</div>
+          <div class="doc-body"><div class="doc-name">令和8年度 都立入試問題｜社会</div><div class="doc-info">Google Drive · 2026年2月実施</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
+
+      </div></div>
+
+      <!-- 大学受験 -->
+      <div class="panel" id="p-daigaku"><div class="article">
+        <h3>入試方法</h3>
+        <ul><li><strong>総合型選抜（旧AO入試）</strong>：将来やりたいことが明確な生徒向け。高1〜2から対策が必須</li><li><strong>学校推薦型選抜</strong>：公募型と指定校型がある</li><li><strong>一般選抜</strong>：国公立は共通テスト＋二次試験。私大は文理別に科目が設定</li></ul>
+        <h3>共通テスト科目</h3>
+        <ul><li>国語（90分）：現代文・古文・漢文</li><li>地理歴史公民（各60分）：地理/歴史/公民から選択</li><li>数学①（70分）：数学Ⅰ または 数学IA</li><li>数学②（70分）：数学II・IIB・C</li><li>理科（各60分）：物理・化学・生物・地学から選択</li><li>外国語（80分）：英語（リーディング＋リスニング）など</li><li>情報（60分）：情報Ⅰ</li></ul>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#378ADD;">🔗 参考サイト</h3>
+        <div class="doc-row" onclick="window.open('https://passnavi.obunsha.co.jp/','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">🎓</div>
+          <div class="doc-body">
+            <div class="doc-name">大学受験パスナビ</div>
+            <div class="doc-info">大学選びから合格まで、大学受験生をサポートするサイト（旺文社）</div>
+          </div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://suisui.gakken.jp/','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📋</div>
+          <div class="doc-body">
+            <div class="doc-name">大学合格SUISUI</div>
+            <div class="doc-info">学校推薦型選抜・総合型選抜に特化した大学受験情報サイト（学研）</div>
+          </div>
+          <span class="badge b-green">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://www.dnc.ac.jp/','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">🏛️</div>
+          <div class="doc-body">
+            <div class="doc-name">大学入試センター</div>
+            <div class="doc-info">共通テストの試験情報・出願・過去問など公式情報（独立行政法人）</div>
+          </div>
+          <span class="badge b-amber">開く</span>
+        </div>
+      </div></div>
+
+      <!-- 中学受験 -->
+      <div class="panel" id="p-chugaku"><div class="article">
+        <h3>受験中学の種類</h3>
+        <ul>
+          <li><strong>私立中学</strong>：小4から受験勉強を開始し3年間で知識を習得。<br>近隣：穎明館・八王子学園・八王子実践・東京純心女子・工学院など</li>
+          <li><strong>公立中高一貫校</strong>：「適性検査」と呼ばれる小学校の知識を活用した思考力問題が出題される。<br>近隣：都立南多摩中等教育学校・都立立川国際中等教育学校・都立三鷹中等教育学校など</li>
+        </ul>
+        <h3>使用教材</h3>
+        <table class="level-table">
+          <tr><th>レベル</th><th>主教材</th><th>副教材</th></tr>
+          <tr><td>STANDARD</td><td>新小学問題集</td><td>漢字ガイダンス、算数トレーニング</td></tr>
+          <tr><td>PROGRESS</td><td>中学受験新演習</td><td>漢字日記、計算日記、中学受験でる順シリーズ</td></tr>
+        </table>
+      </div></div>
+
+      <!-- 模試 -->
+      <div class="panel" id="p-moshi"><div class="article">
+        <h3>模試とは？</h3>
+        <ul>
+          <li>事前の付け焼刃の知識はゼロ</li>
+          <li>制限時間との闘い</li>
+          <li>最大限の力で実力を出す場</li>
+          <li>日頃の「学習の取り組み方」がストレートに反映される試験</li>
+          <li>何が得意で、何が苦手なのかを数値として判定できる</li>
+        </ul>
+
+        <h3>対応① ほめるべきところは褒めて、締めるべきところは締める</h3>
+        <div class="info">点数が9割以上・偏差値65以上・前回から30〜40点以上伸びていたら、講師も一緒に喜んであげる。</div>
+        <ul>
+          <li>これまでどんな勉強法をしていたかを振り返り、その効果が出たことを一緒に確かめ、成績維持のためにすべきことを一緒に考えてあげる</li>
+          <li>「現状に満足している」と思っている生徒は努力を怠る危険性がある。どんな生徒でも取りきれなかった分野があるので、その伸びしろにどん欲になれるよう促してあげる</li>
+        </ul>
+
+        <h3>対応② 何を改善すれば次につながるのか、次回への希望と意欲を引き出す</h3>
+        <div class="note">成績が悪かった・偏差値が下がった・志望校判定がDだったなど、思うような結果が取れていないときこそ講師が懐に入ってあげる。</div>
+        <ul>
+          <li>何が悪くて点数が取れなかったのかを冷静に分析することから入り、「こうすれば成績は伸びる」という道筋を示してあげる</li>
+          <li>生徒が過度に落ち込んでいる場合は、よかったところを褒めて自己肯定感を高めてあげる（落ち込みすぎて学習意欲が下がっては元も子もない）</li>
+        </ul>
+
+        <h3>対応③ 模試の「見方」を教える</h3>
+        <ul>
+          <li>初めて模試を受ける生徒や、結果の良し悪しがわからない生徒には受け止め方を指導する</li>
+        </ul>
+        <div class="info">
+          ・模試は自分の本来の実力が素直に示された試験であること<br>
+          ・模試で高得点が取れることは「勉強全体にしっかり取り組めている」ことを示していること<br>
+          ・模試の結果は「自分の得意・苦手」がしっかり分析されているので、それを受け止めて今後の勉強を見直すこと
+        </div>
+        <div class="note">小学生は自分で学習計画を立てられないので、「漢字を頑張ろうね」「計算を伸ばそう」など、講師から具体的に2〜3つアドバイスをする。</div>
+      </div></div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+const VALID_ID='meiko-nishihachi',VALID_PW='303237';
+function doLogin(){
+  if(document.getElementById('lid').value.trim()===VALID_ID&&document.getElementById('lpw').value.trim()===VALID_PW){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('portal-screen').style.display='flex';
+  }else{document.getElementById('lerr').style.display='block';}
+}
+document.getElementById('lpw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function doLogout(){
+  document.getElementById('portal-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('lid').value='';document.getElementById('lpw').value='';
+  document.getElementById('lerr').style.display='none';
+}
+
+const PT={
+  top:['ダッシュボード',''],about:['教室概要・理念','基本理念・ルール'],
+  mindset:['心構え・コンプライアンス','基本理念・ルール'],guideline:['講師―生徒間ガイドライン','基本理念・ルール'],
+  rules:['教室のルール','基本理念・ルール'],tel:['電話対応','業務マニュアル'],visitor:['来客対応','業務マニュアル'],
+  absent:['教室長不在時の対応','業務マニュアル'],flow:['振り返り授業の流れ','授業・教材'],
+  '3kinds':['明光の3つの授業','授業・教材'],policy:['授業運営方針','授業・教材'],
+  clamas:['ClaMaS 入力ガイド','授業・教材'],roleplay:['授業ロープレ','授業・教材'],
+  quiz:['小テスト','授業・教材'],
+  'meiko-work':['明光式！ワーク','小学生教材 › 一般生'],'kyokasho-drill':['教科書ドリル（漢字・計算）','小学生教材 › 一般生'],
+  chuuju:['中学受験新演習','小学生教材 › 中学受験生'],shinsho:['新小学問題集','小学生教材 › 中学受験生'],
+  hyojun:['標準新演習','小学生教材 › 中学受験生'],iwork:['iワーク','中学生教材'],
+  foresta:['フォレスタ','中学生教材'],koshu:['講習テキストマスターα/β','中学生教材'],
+  nyumon:['入門英文法の核心','高校生教材'],'pol-bunpo':['英文法ポラリス','高校生教材'],
+  'pol-hinshu':['頻出問題ポラリス','高校生教材'],'pol-kaisya':['英文解釈ポラリス','高校生教材'],
+  'pol-chobu':['英語長文ポラリス','高校生教材'],chart:['チャート式（白・黄・青）','高校生教材'],
+  koukou:['高校生教材','授業・教材'],
+  koko:['高校受験情報','受験情報'],daigaku:['大学受験情報','受験情報'],
+  chugaku:['中学受験情報','受験情報'],moshi:['模試の返却・フィードバック','授業・教材']
+};
+
+function sp(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn,.tree-leaf').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('p-'+id);
+  if(panel)panel.classList.add('active');
+  if(btn)btn.classList.add('active');
+  const info=PT[id]||[id,''];
+  document.getElementById('ptitle').textContent=info[0];
+  document.getElementById('psub').textContent=info[1]||'明光義塾 西八王子いちょう通り教室';
+}
+
+function tt(id){
+  const el=document.getElementById(id);
+  const arr=document.getElementById(id+'-a');
+  if(el){el.classList.toggle('open');if(arr)arr.classList.toggle('open');}
+}
+
+function showMondai(id, btn) {
+  document.querySelectorAll('.mondai-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.mondai-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('m-' + id);
+  if (panel) panel.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+</script>
+</body>
+</html>
