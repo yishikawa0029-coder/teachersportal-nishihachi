@@ -181,6 +181,10 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <button class="nav-btn" onclick="sp('absent',this)"><span class="ndot"></span>教室長不在時の対応</button>
       </div>
       <div class="nav-section">
+        <div class="nav-label">教務知識</div>
+        <button class="nav-btn" onclick="sp('benkyonosikata',this)"><span class="ndot"></span>勉強の仕方</button>
+      </div>
+      <div class="nav-section">
         <div class="nav-label">授業・教材</div>
         <button class="nav-btn" onclick="sp('policy',this)"><span class="ndot"></span>授業運営方針</button>
         <!-- 学力と教材 ツリー -->
@@ -238,6 +242,18 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
             <div class="tree-sub-group">
               <button class="tree-leaf" onclick="sp('koukou',this)">高校生教材</button>
             </div>
+          </div>
+        </div>
+        <!-- ICT教材 ツリー -->
+        <div class="tree-group">
+          <button class="tree-parent" onclick="tt('tict',this)">
+            <span class="tree-arrow" id="tict-a">▶</span>
+            <span class="tree-parent-label">ICT教材</span>
+          </button>
+          <div class="tree-children" id="tict">
+            <button class="tree-leaf" onclick="sp('qureo',this)">QUREOプログラミング</button>
+            <button class="tree-leaf" onclick="sp('foresta-eizo',this)">理社フォレスタ映像</button>
+            <button class="tree-leaf" onclick="sp('meiko-muse',this)">MEIKO MUSE</button>
           </div>
         </div>
         <button class="nav-btn" onclick="sp('flow',this)"><span class="ndot"></span>振り返り授業の流れ</button>
@@ -377,6 +393,53 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <ol><li>前日までに教室長から教室の鍵をもらう</li><li>当日、教室入口の扉を開錠する</li><li>注水台・のぼり・立て看板を外に出す</li><li>電気をつける</li><li>アプリ塾生証のチャットを確認し、振替・欠席連絡のみ返信する</li><li>教室長へ鍵開け完了を報告（アプリチャットでOK）</li><li>鍵は教室長が来るまで持っておき、手渡しで返却</li></ol>
         <h3>鍵閉めの手順</h3>
         <ol><li>タブレット保管庫にすべてのタブレットが収納されているか確認（教室長タブレット（青）はしまわなくてOK）</li><li>授業ブースと自習席の椅子をすべて机の上にあげる</li><li>のぼり・注水台・立て看板を教室内にしまう</li><li>電気を消す</li><li>教室の入口を施錠する</li><li>教室長に施錠完了を連絡（アプリチャットでOK）</li><li>通話記録簿・チャット内容を写真で教室長に共有する</li><li>鍵は手渡しで教室長に返却</li></ol>
+      </div></div>
+
+      <!-- 勉強の仕方 -->
+      <div class="panel" id="p-benkyonosikata"><div class="article">
+        <h3>勉強の仕方</h3>
+        <p>明光義塾の授業の受け方や、勉強の仕方を生徒に伝えるためのツールです。必要に応じて生徒へ見せたり配布したりしてください。</p>
+        <div class="divider"></div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1EGa08shVcoCDLVDeL38WxvPkiCK3UaV2/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📄</div>
+          <div class="doc-body"><div class="doc-name">01. 明光義塾の授業の受け方〜振り返り授業〜</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1tAp1CJYVHKacrbTKs-kzl2vQZs-MWhNR/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📄</div>
+          <div class="doc-body"><div class="doc-name">02. 「学び発見！振り返りノート」の使い方</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1zvgYof3AOCji0FW6_taezwPzNr7A2YlU/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📄</div>
+          <div class="doc-body"><div class="doc-name">03. ノートの使い方</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1w3ZnaSFuXwdWpD1pjEnl0ApS9uA6QSG-/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📄</div>
+          <div class="doc-body"><div class="doc-name">04. 〔小学生〕家庭学習のポイント</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-green">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1RWCy17gQzVc4N5-RExDIbO_mpG6DJBKj/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📄</div>
+          <div class="doc-body"><div class="doc-name">05. 〔中学生〕家庭学習のポイント</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-green">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1Y6WmrxCUsxh1fPKaVuRRja9grLbgjwIg/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">📄</div>
+          <div class="doc-body"><div class="doc-name">06. 英単語暗記法</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-amber">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1inNl3539FQNBgv82EAl4dNhxbj3oGJMP/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">📄</div>
+          <div class="doc-body"><div class="doc-name">07. 定期テストの勉強の仕方</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-amber">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1a0YKnKxFfJaDrnHRBB1iJ2Yo8sRxx-9J/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#FBEAF0;">📄</div>
+          <div class="doc-body"><div class="doc-name">08. 学校の授業の受け方</div><div class="doc-info">Google Drive · PDF</div></div>
+          <span class="badge b-purple">開く</span>
+        </div>
       </div></div>
 
       <!-- 振り返り授業 -->
@@ -593,6 +656,138 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         </table>
       </div></div>
 
+      <!-- QUREOプログラミング -->
+      <div class="panel" id="p-qureo"><div class="article">
+        <h3>QUREOプログラミングとは</h3>
+        <p>ゲームの世界でミッションに挑戦しながら、プログラミングの考え方を学ぶICT教材です。iPadを使用して行います。</p>
+        <div class="info">
+          <strong>初級コース 導入パート（STEP.1）</strong>：約3ヶ月。マインクラフトでプログラミングの思考を学ぶ。<br>
+          <strong>初級コース メインパート（STEP.2）</strong>：約2年。ゲームを作りながらプログラミングの基礎概念を習得。
+        </div>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#378ADD;">🔗 学習ポータル（生徒ログイン）</h3>
+        <div class="doc-row" onclick="window.open('https://portal.qureo.jp/login','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">🎮</div>
+          <div class="doc-body">
+            <div class="doc-name">QUREOプログラミング 学習ポータル</div>
+            <div class="doc-info">portal.qureo.jp · 生徒ログイン画面</div>
+          </div>
+          <span class="badge b-green">開く</span>
+        </div>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#639922;">📄 授業マニュアル</h3>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1y1F9jIiI1xXi1uxwj6_zh84a5Ptgdo9U/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#EAF3DE;">📘</div>
+          <div class="doc-body">
+            <div class="doc-name">初級コース 導入パート｜授業マニュアル</div>
+            <div class="doc-info">Google Drive · マインクラフト教材（約3ヶ月）</div>
+          </div>
+          <span class="badge b-green">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1aXPl4qKKHj_OleDLtp12cEQUBkZOI8dJ/view?usp=drive_link','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">📗</div>
+          <div class="doc-body">
+            <div class="doc-name">初級コース メインパート｜授業マニュアル</div>
+            <div class="doc-info">Google Drive · QUREO教材（約2年）</div>
+          </div>
+          <span class="badge b-blue">開く</span>
+        </div>
+      </div></div>
+
+      <!-- 理社フォレスタ映像 -->
+      <div class="panel" id="p-foresta-eizo"><div class="article">
+        <h3>理社フォレスタ映像とは</h3>
+        <p>「映像授業」と教材「フォレスタ」を組み合わせて学習する授業です。これまで時間を要していた基本事項の解説を映像授業が担うことで、視覚的に生徒の理解を促すことができます。</p>
+        <div class="info">対象教科：<strong>理科・社会</strong>（フォレスタを使用している中学生）</div>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#378ADD;">🔗 学習ポータル（生徒ログイン）</h3>
+        <div class="doc-row" onclick="window.open('https://forestanet.com/auth/login','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">🎬</div>
+          <div class="doc-body">
+            <div class="doc-name">理社フォレスタ映像 学習ポータル</div>
+            <div class="doc-info">forestanet.com · 生徒ログイン画面</div>
+          </div>
+          <span class="badge b-amber">開く</span>
+        </div>
+
+        <div class="divider"></div>
+        <h3>🔑 ログインID・パスワード一覧</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#185FA5;margin-bottom:8px;">📘 理科</div>
+            <table class="level-table">
+              <tr><th>番号</th><th>ID</th><th>パスワード</th></tr>
+              <tr><td>①</td><td>FN134211</td><td>2K7wsgNV</td></tr>
+              <tr><td>②</td><td>FN134212</td><td>Thk58YuG</td></tr>
+              <tr><td>③</td><td>FN134213</td><td>4NiFjJt7</td></tr>
+              <tr><td>④</td><td>FN134214</td><td>NZ3hbF6w</td></tr>
+              <tr><td>⑤</td><td>FN134215</td><td>MhtH6Yd4</td></tr>
+              <tr><td>⑥</td><td>FN134216</td><td>C3jXdx4P</td></tr>
+              <tr><td>⑦</td><td>FN134217</td><td>7TbSf3Ru</td></tr>
+              <tr><td>⑧</td><td>FN134218</td><td>68hErbMA</td></tr>
+              <tr><td>⑨</td><td>FN134219</td><td>8GixV5Jn</td></tr>
+              <tr><td>⑩</td><td>FN134220</td><td>udg52CJS</td></tr>
+            </table>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#3B6D11;margin-bottom:8px;">📗 社会</div>
+            <table class="level-table">
+              <tr><th>番号</th><th>ID</th><th>パスワード</th></tr>
+              <tr><td>①</td><td>FN134221</td><td>2eZaSF3w</td></tr>
+              <tr><td>②</td><td>FN134222</td><td>dubU27BC</td></tr>
+              <tr><td>③</td><td>FN134223</td><td>eiW4Bj6P</td></tr>
+              <tr><td>④</td><td>FN134224</td><td>3mPwDsB7</td></tr>
+              <tr><td>⑤</td><td>FN134225</td><td>hR7zDM3d</td></tr>
+              <tr><td>⑥</td><td>FN134226</td><td>j35EHAbw</td></tr>
+              <tr><td>⑦</td><td>FN134227</td><td>p8WfNBt5</td></tr>
+              <tr><td>⑧</td><td>FN134228</td><td>iX8CxN6u</td></tr>
+              <tr><td>⑨</td><td>FN134229</td><td>e8CNn2Zk</td></tr>
+              <tr><td>⑩</td><td>FN134230</td><td>Hz4XAmw2</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#639922;">📄 授業マニュアル</h3>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1PdpDHx-mNFhoyI2OhcjjAeI4mEm5OrTY/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">📘</div>
+          <div class="doc-body">
+            <div class="doc-name">理社フォレスタ映像｜授業マニュアル</div>
+            <div class="doc-info">Google Drive</div>
+          </div>
+          <span class="badge b-amber">開く</span>
+        </div>
+      </div></div>
+
+      <!-- MEIKO MUSE -->
+      <div class="panel" id="p-meiko-muse"><div class="article">
+        <h3>MEIKO MUSEとは</h3>
+        <p>教科書内容の基礎固めから大学受験対策まで、一人ひとりの目的に合わせて選べる、高校生のための通塾型映像授業です。</p>
+        <div class="info">対象：<strong>高校生</strong>（映像授業を受講している生徒）</div>
+
+        <div class="divider"></div>
+        <h3 style="border-left-color:#378ADD;">🔗 リンク・マニュアル</h3>
+        <div class="doc-row" onclick="window.open('https://www.meiko-leap.jp/login','_blank')">
+          <div class="doc-icon" style="background:#E6F1FB;">🎓</div>
+          <div class="doc-body">
+            <div class="doc-name">MEIKO MUSE ログイン</div>
+            <div class="doc-info">meiko-leap.jp · 受講サイト</div>
+          </div>
+          <span class="badge b-blue">開く</span>
+        </div>
+        <div class="doc-row" onclick="window.open('https://drive.google.com/file/d/1fxLxp0ZaZMdtDeHuKptNLlaxeW4emZWb/view?usp=sharing','_blank')">
+          <div class="doc-icon" style="background:#FAEEDA;">📘</div>
+          <div class="doc-body">
+            <div class="doc-name">MEIKO MUSE｜受講マニュアル</div>
+            <div class="doc-info">Google Drive</div>
+          </div>
+          <span class="badge b-amber">開く</span>
+        </div>
+      </div></div>
+
       <!-- 模試 -->
       <div class="panel" id="p-moshi"><div class="article">
         <h3>模試とは？</h3>
@@ -656,10 +851,13 @@ const PT={
   top:['ダッシュボード',''],about:['教室概要・理念','基本理念・ルール'],
   mindset:['心構え・コンプライアンス','基本理念・ルール'],guideline:['講師―生徒間ガイドライン','基本理念・ルール'],
   rules:['教室のルール','基本理念・ルール'],tel:['電話対応','業務マニュアル'],visitor:['来客対応','業務マニュアル'],
-  absent:['教室長不在時の対応','業務マニュアル'],flow:['振り返り授業の流れ','授業・教材'],
+  absent:['教室長不在時の対応','業務マニュアル'],benkyonosikata:['勉強の仕方','教務知識'],flow:['振り返り授業の流れ','授業・教材'],
   '3kinds':['明光の3つの授業','授業・教材'],policy:['授業運営方針','授業・教材'],
   clamas:['ClaMaS 入力ガイド','授業・教材'],roleplay:['授業ロープレ','授業・教材'],
   quiz:['小テスト','授業・教材'],
+  qureo:['QUREOプログラミング','授業・教材 › ICT教材'],
+  'foresta-eizo':['理社フォレスタ映像','授業・教材 › ICT教材'],
+  'meiko-muse':['MEIKO MUSE','授業・教材 › ICT教材'],
   'meiko-work':['明光式！ワーク','小学生教材 › 一般生'],'kyokasho-drill':['教科書ドリル（漢字・計算）','小学生教材 › 一般生'],
   chuuju:['中学受験新演習','小学生教材 › 中学受験生'],shinsho:['新小学問題集','小学生教材 › 中学受験生'],
   hyojun:['標準新演習','小学生教材 › 中学受験生'],iwork:['iワーク','中学生教材'],
