@@ -181,8 +181,17 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <button class="nav-btn" onclick="sp('absent',this)"><span class="ndot"></span>教室長不在時の対応</button>
       </div>
       <div class="nav-section">
+        <div class="nav-label">緊急時対応</div>
+        <button class="nav-btn" onclick="sp('kyukyu',this)"><span class="ndot"></span>即・教室長に報告すること</button>
+        <button class="nav-btn" onclick="sp('zaseki',this)"><span class="ndot"></span>座席表にいない生徒が来たとき</button>
+      </div>
+      <div class="nav-section">
         <div class="nav-label">教務知識</div>
         <button class="nav-btn" onclick="sp('benkyonosikata',this)"><span class="ndot"></span>勉強の仕方</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">カウンセリング</div>
+        <button class="nav-btn" onclick="sp('counseling',this)"><span class="ndot"></span>生徒カウンセリング</button>
       </div>
       <div class="nav-section">
         <div class="nav-label">授業・教材</div>
@@ -257,6 +266,7 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
           </div>
         </div>
         <button class="nav-btn" onclick="sp('flow',this)"><span class="ndot"></span>振り返り授業の流れ</button>
+        <button class="nav-btn" onclick="sp('note-shido',this)"><span class="ndot"></span>ノート指導</button>
         <button class="nav-btn" onclick="sp('3kinds',this)"><span class="ndot"></span>明光の3つの授業</button>
         <button class="nav-btn" onclick="sp('clamas',this)"><span class="ndot"></span>ClaMaS 入力ガイド</button>
         <button class="nav-btn" onclick="sp('roleplay',this)"><span class="ndot"></span>授業ロープレ</button>
@@ -288,9 +298,11 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
       <!-- ダッシュボード -->
       <div class="panel active" id="p-top">
         <div class="sec-label">マニュアルカテゴリ</div>
-        <div class="dash-grid">
+        <div class="dash-grid-3">
           <div class="dash-card" onclick="sp('mindset',null)"><div class="dash-card-title">📖 基本理念・ルール</div><div class="dash-card-desc">教室コンセプト・心構え・コンプライアンス・3Cの柱</div><div class="dash-card-meta"><span class="badge b-blue">必読</span></div></div>
           <div class="dash-card" onclick="sp('tel',null)"><div class="dash-card-title">📞 業務マニュアル</div><div class="dash-card-desc">電話対応・来客対応・教室長不在時の鍵開け閉め手順</div><div class="dash-card-meta"><span class="badge b-green">3 項目</span></div></div>
+          <div class="dash-card" onclick="sp('kyukyu',null)"><div class="dash-card-title">🚨 緊急時対応</div><div class="dash-card-desc">即報告すべき事象・座席表にいない生徒への対応</div><div class="dash-card-meta"><span class="badge b-red">要確認</span></div></div>
+          <div class="dash-card" onclick="sp('benkyonosikata',null)"><div class="dash-card-title">📚 教務知識</div><div class="dash-card-desc">授業の受け方・勉強法・ノートの使い方など生徒向け資料</div><div class="dash-card-meta"><span class="badge b-gray">8 資料</span></div></div>
           <div class="dash-card" onclick="sp('flow',null)"><div class="dash-card-title">🎓 授業・教材</div><div class="dash-card-desc">教材ガイド・振り返り授業・ClaMaS入力・ロープレ</div><div class="dash-card-meta"><span class="badge b-amber">全学年対応</span></div></div>
           <div class="dash-card" onclick="sp('koko',null)"><div class="dash-card-title">✏️ 受験情報</div><div class="dash-card-desc">高校・大学・中学の受験制度・入試対策・近隣学校情報</div><div class="dash-card-meta"><span class="badge b-purple">3 カテゴリ</span></div></div>
         </div>
@@ -393,6 +405,111 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <ol><li>前日までに教室長から教室の鍵をもらう</li><li>当日、教室入口の扉を開錠する</li><li>注水台・のぼり・立て看板を外に出す</li><li>電気をつける</li><li>アプリ塾生証のチャットを確認し、振替・欠席連絡のみ返信する</li><li>教室長へ鍵開け完了を報告（アプリチャットでOK）</li><li>鍵は教室長が来るまで持っておき、手渡しで返却</li></ol>
         <h3>鍵閉めの手順</h3>
         <ol><li>タブレット保管庫にすべてのタブレットが収納されているか確認（教室長タブレット（青）はしまわなくてOK）</li><li>授業ブースと自習席の椅子をすべて机の上にあげる</li><li>のぼり・注水台・立て看板を教室内にしまう</li><li>電気を消す</li><li>教室の入口を施錠する</li><li>教室長に施錠完了を連絡（アプリチャットでOK）</li><li>通話記録簿・チャット内容を写真で教室長に共有する</li><li>鍵は手渡しで教室長に返却</li></ol>
+
+        <div class="divider"></div>
+        <h3>🔑 鍵開け・鍵閉め 報告フォーマット</h3>
+        <div class="note">アプリチャットでコピーして使ってください。</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#185FA5;margin-bottom:6px;">＜鍵開け＞</div>
+            <div class="info" style="white-space:pre-line;font-size:12px;">お疲れ様です。
+●時●分に鍵開けました。</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#185FA5;margin-bottom:6px;">＜鍵閉め＞</div>
+            <div class="info" style="white-space:pre-line;font-size:12px;">お疲れ様です。
+●時●分に鍵閉めました。
+電話対応：なし／あり ※ありの場合は電話連絡帳を画像添付
+その他共有事項：</div>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- 即・教室長に報告すること -->
+      <div class="panel" id="p-kyukyu"><div class="article">
+        <h3>即・教室長に報告すること</h3>
+        <div class="important">以下の事象が発生した場合は、授業中・面談中にかかわらず<strong>即座に</strong>教室長へ報告してください。</div>
+
+        <h3>報告すべき事象の例</h3>
+        <ul>
+          <li><strong>機材トラブル</strong>：タブレット・プログラミング機材のトラブルで授業ができない</li>
+          <li><strong>生徒の様子がおかしい</strong>：体調不良、泣いてしまった、ケンカ、他の生徒へのちょっかい・暴力・いたずら、備品の破壊、教室内での盗難の可能性 等</li>
+          <li><strong>授業内容の未消化</strong>：90分で算国をやる授業なのに、算数しかできなかった</li>
+          <li><strong>テスト範囲外の実施</strong>：テスト範囲と関係のないところを実施してしまった</li>
+          <li><strong>指導が偏った</strong>：1人の生徒につきっきりになってしまい、他の生徒の指導が厳しい状況</li>
+          <li><strong>指導困難</strong>：生徒が教えてほしい内容のレベルが高く、自分（講師）がわからない・指導できない</li>
+        </ul>
+
+        <h3>対応方法</h3>
+        <div class="info">
+          <strong>教室長が面談中でも「面談中すいません」で割り込んでください。</strong><br>
+          内容は保護者や生徒に聞こえないように場所を移動し、小声で話しましょう。<br><br>
+          <strong>教室長が不在の場合</strong>は、電話で連絡してください。
+        </div>
+
+        <h3>講師が持っておくべき意識</h3>
+        <ul>
+          <li>保護者から指摘される前（＝生徒が帰宅する前）に、教室長から保護者へ第一報を入れられるよう報告する<br><span style="color:#A32D2D;font-size:12px;">→ 保護者から先に指摘されたらクレームや休会になる可能性が高い</span></li>
+          <li>保護者（お客様）からは月謝をもらっており、面談で授業内容を話し合って合意をとっている（＝約束している）。勝手に約束と違うことを実施する＝約束を破ること。必ず決められた内容を実施する。</li>
+          <li>生徒は保護者へ今日起こったことを伝える。教室長への報告や共有を放置するとトラブルになる。</li>
+        </ul>
+      </div></div>
+
+      <!-- 座席表にいない生徒が来たとき -->
+      <div class="panel" id="p-zaseki"><div class="article">
+        <h3>座席表にいない生徒が来たとき</h3>
+        <div class="important">帰宅させてはいけません。まず授業を実施する判断をしてください。</div>
+
+        <h3>対応の原則</h3>
+        <ul>
+          <li><strong>とりあえず授業を実施する</strong>判断をする</li>
+          <li><strong>帰宅させると逆に問題になる可能性があります</strong><br>
+            <span style="color:#A32D2D;font-size:12px;">帰らせて帰り道に事故でも遭うと、責任問題にもなります。リスクしかありません。</span>
+          </li>
+          <li>座席の調整は<strong>授業後に教室長が実施します</strong></li>
+        </ul>
+
+        <div class="note">授業を開始したら、速やかに教室長へ報告・連絡してください。</div>
+      </div></div>
+
+      <!-- 生徒カウンセリング -->
+      <div class="panel" id="p-counseling"><div class="article">
+        <h3>生徒カウンセリング</h3>
+
+        <h3>目的</h3>
+        <ul>
+          <li>生徒のモチベーションの管理</li>
+          <li>保護者への面倒見の伝達</li>
+        </ul>
+
+        <h3>内容・流れ</h3>
+        <ul>
+          <li><strong>① 学習振り返り・目標設定</strong>（授業冒頭）<br>
+            → 授業冒頭で書いてもらう</li>
+          <li><strong>② 生徒カウンセリング</strong><br>
+            → 目標設定シートに準じた「カウンセリングシート」にて、5分ほど生徒に話を聞く<br>
+            → 書いてもらったものは教室長へ提出（③終了後）</li>
+          <li><strong>③ 保護者へチャット送付</strong>（授業後）<br>
+            → テンプレートに沿って、話したことなどを保護者へ共有<br>
+            → 共有前に教室長へ伝えるべきことや、別途面談が必要な場合はそちらを優先する</li>
+        </ul>
+
+        <div class="divider"></div>
+        <h3>📋 保護者チャット テンプレート</h3>
+        <div class="info" style="white-space:pre-line; font-size:12.5px; line-height:1.9;">いつもお世話になっております。講師の●●でございます。
+
+本日、先月の学習の振り返りと今月の学習目標を一緒に決めましたのでご報告いたします。
+
+【学習面】
+先月の取り組み：（よくできた・まあまあ・ふつう・あまりできなかった）
+今月の目標：（選んだ項目を記入）
+今月最初にやること：（具体的に記入）
+
+【様子・コメント】
+（気になったこと・頑張っていたこと・声かけしたことなど、1〜2文で）
+
+気になることがあればいつでもご連絡ください。
+今月もよろしくお願いします。</div>
       </div></div>
 
       <!-- 勉強の仕方 -->
@@ -453,6 +570,32 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <ul><li>問題はすべてノートに解く（教材への書き込みはNG）</li><li>残り15分は振り返りの時間（△×の問題の解き直し＋振り返りノート記入）</li><li>宿題は次の授業までの日数×0.5ページ以上</li><li>宿題忘れ2回目以降は居残り実施</li></ul>
       </div></div>
 
+      <!-- ノート指導 -->
+      <div class="panel" id="p-note-shido"><div class="article">
+        <h3>振り返りノートについて</h3>
+
+        <h3>前提認識</h3>
+        <ul>
+          <li>保護者が見るもの ＝ <strong>授業報告の一つ</strong></li>
+          <li>すべての項目が埋まっていること</li>
+        </ul>
+
+        <h3>書かせるタイミング</h3>
+        <ul>
+          <li><strong>HWCと前回授業の振り返りのとき</strong><br>
+            → HW実施と前回の振り返りのチェックをつけさせる</li>
+          <li><strong>新しい公式や文法をインプットした時</strong><br>
+            → 公式や新出文法を使った英文を書かせる</li>
+          <li><strong>演習と○付け／解説が終わった都度</strong><br>
+            → 問題の解き方やミスしたポイントなどを書かせる</li>
+        </ul>
+
+        <div class="info">
+          <strong>★</strong> 振り返りノートを書かせる時間を頻繁に設けることで、生徒たちの学びの定着につながります。<br>
+          <strong>★</strong> また講師側のゆとりもできるため、ClaMaSのコメント入力や他の生徒への対応もできるようになります。
+        </div>
+      </div></div>
+
       <!-- 3つの授業 -->
       <div class="panel" id="p-3kinds"><div class="article">
         <h3>通常授業（予習型）</h3>
@@ -467,6 +610,14 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
       <div class="panel" id="p-policy"><div class="article">
         <h3>授業に入る際の大事なこと</h3>
         <ul><li>生徒の人生に影響を与える覚悟と責任を持つ</li><li>承認することが第一。甘やかさず、締めるべき時は締める</li><li>ノートは必ず使わせる（ノート指導も勉強法の一つ）</li><li>教えるときは図や文字を書いて教える（口頭のみはNG、特に数学は図式化）</li><li>授業中に担当を離れない（コピーは授業準備時に済ませる）</li><li>座って授業する（目線を合わせることで説得力が増す）</li><li>90分で2〜3単元進める（柔軟に対応）</li></ul>
+        <div class="important">
+          <strong>【授業中の講師と生徒の距離に気を付けてください】</strong><br><br>
+          授業中の生徒と講師の物理的な距離が近く、生徒のパーソナルスペースに入り込んでしまうケースがあります。その結果、生徒が不安・不快感・威圧を感じ、「塾に行きたくない」と感じてしまうことがあります。<br><br>
+          <strong>適切な距離：「パーテーションの縁よりも通路側」</strong><br>
+          パーテーションの縁を超えて生徒側に体が入り込んでいる場合、完全に生徒のパーソナルスペースに入ってしまっています。<br><br>
+          <strong>原因として多いのは</strong>：生徒のテキストやノートを見るために体を寄せてしまうケース。<br>
+          指導中にテキストやノートを見るときは、<strong>「ちょっと見せて」と声をかけて、講師側に引き寄せて見る</strong>ようにしましょう。
+        </div>
         <h3>学力4段階レベル（小学生）</h3>
         <table class="level-table">
           <tr><th>レベル</th><th>特徴・目的</th></tr>
@@ -491,6 +642,15 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <ul><li>出欠（出席・欠席・遅刻）、宿題実施状況</li><li>学習進捗・単元管理、説明できた数、〇△×の数</li><li>次回までの宿題、次回開始ページ</li><li>講師からのコメント（保護者に送信される）</li><li>講師共有コメント（保護者には非表示・引き継ぎ用）</li><li>振り返りノートの画像</li></ul>
         <h3>講師コメントの書き方（超重要）</h3>
         <div class="note">講師コメントは保護者への授業報告です。書いた内容がそのまま保護者に届くため、表現は慎重に。</div>
+        <h3>【コメント内容について】</h3>
+        <div class="info">
+          <strong>コメントの役割は「その日の授業でやった単元を、生徒自身で解けるようになったかどうか」を伝えるものです。単元のことを書いてください。</strong>
+        </div>
+        <ul>
+          <li>授業の単元に関する<strong>成果や課題は必ず書く</strong>（マスト）</li>
+          <li>授業中の生徒の様子は書いても書かなくてもOK（任意）</li>
+          <li>「集中して取り組めたか」は<strong>書かなくてよい</strong>（プルダウンに項目があります）</li>
+        </ul>
         <div class="info" style="white-space:pre-line; font-family: inherit;">【確認テスト】
 ＜単元＞
 ＜正答率＞
@@ -851,7 +1011,10 @@ const PT={
   top:['ダッシュボード',''],about:['教室概要・理念','基本理念・ルール'],
   mindset:['心構え・コンプライアンス','基本理念・ルール'],guideline:['講師―生徒間ガイドライン','基本理念・ルール'],
   rules:['教室のルール','基本理念・ルール'],tel:['電話対応','業務マニュアル'],visitor:['来客対応','業務マニュアル'],
-  absent:['教室長不在時の対応','業務マニュアル'],benkyonosikata:['勉強の仕方','教務知識'],flow:['振り返り授業の流れ','授業・教材'],
+  absent:['教室長不在時の対応','業務マニュアル'],
+  kyukyu:['即・教室長に報告すること','緊急時対応'],
+  zaseki:['座席表にいない生徒が来たとき','緊急時対応'],
+  benkyonosikata:['勉強の仕方','教務知識'],counseling:['生徒カウンセリング','カウンセリング'],flow:['振り返り授業の流れ','授業・教材'],'note-shido':['ノート指導','授業・教材'],
   '3kinds':['明光の3つの授業','授業・教材'],policy:['授業運営方針','授業・教材'],
   clamas:['ClaMaS 入力ガイド','授業・教材'],roleplay:['授業ロープレ','授業・教材'],
   quiz:['小テスト','授業・教材'],
