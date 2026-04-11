@@ -188,6 +188,7 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
       <div class="nav-section">
         <div class="nav-label">教務知識</div>
         <button class="nav-btn" onclick="sp('benkyonosikata',this)"><span class="ndot"></span>勉強の仕方</button>
+        <button class="nav-btn" onclick="sp('sankaku-check',this)"><span class="ndot"></span>〇△×チェック</button>
       </div>
       <div class="nav-section">
         <div class="nav-label">カウンセリング</div>
@@ -470,6 +471,67 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         </ul>
 
         <div class="note">授業を開始したら、速やかに教室長へ報告・連絡してください。</div>
+      </div></div>
+
+      <!-- 〇△×チェック -->
+      <div class="panel" id="p-sankaku-check"><div class="article">
+        <h3>〇△×チェック × ケアレスミス分析</h3>
+        <div class="info"><strong>目的：</strong>ミスの原因を「理解不足」と「ケアレス」で切り分け、正しい改善行動につなげる</div>
+
+        <h3>基本の考え方</h3>
+        <table class="level-table">
+          <tr><th>チェック</th><th>意味</th><th>ミスの性質</th><th>対応の方向性</th></tr>
+          <tr>
+            <td style="text-align:center;font-size:16px;">○</td>
+            <td>自力で正答</td>
+            <td>理解はできているが、油断でのケアレスの可能性あり</td>
+            <td>「どこに気をつけて解けたか」を言語化し、理解の安定化・確認習慣をつける</td>
+          </tr>
+          <tr style="background:#FFF9E6;">
+            <td style="text-align:center;font-size:16px;font-weight:700;">△</td>
+            <td>講師のヒントor解説を見て理解できた問題</td>
+            <td>思考の途中で止まる・見落とし・根拠が弱い／ケアレスミスor思考の甘さのどちらもあり得る</td>
+            <td>「何で止まったのか」「ヒント・解説のどこで理解できたか」「次はどうすれば自力でいけるか」を明確にする（＝最重要ゾーン）</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;font-size:16px;">×</td>
+            <td>解説が必要、または理解が不十分</td>
+            <td>根本理解不足・誤解・用語理解不足によるミス</td>
+            <td>単元理解のやり直し、類題演習での補強が必要</td>
+          </tr>
+        </table>
+        <div class="note"><strong>△ゾーン＝ケアレスミスの温床。</strong>ここを重点的に分析・指導するのがポイント。</div>
+
+        <h3>授業内の活用ステップ</h3>
+        <ul>
+          <li><strong>① 自己チェック</strong>：解き終えたら〇△×をつける</li>
+          <li><strong>② 発問で原因を探る</strong>：講師が口頭で深掘り</li>
+          <li><strong>③ 振り返りノートに記録させる</strong></li>
+        </ul>
+
+        <h3>発問例</h3>
+        <table class="level-table">
+          <tr><th>チェック</th><th>発問例</th><th>生徒の答え例</th></tr>
+          <tr><td style="text-align:center;">○</td><td>この問題、どこに気をつけたから解けた？</td><td>符号をちゃんと確認して進めました</td></tr>
+          <tr style="background:#FFF9E6;"><td style="text-align:center;font-weight:700;">△</td><td>もしヒントなしで気づくとしたら、何を見ればよかった？</td><td>「符号を見て」って言われたときに、あ、ここ違う！って気づきました</td></tr>
+          <tr style="background:#FFF9E6;"><td style="text-align:center;font-weight:700;">△</td><td>解説のどの部分で「わかった！」ってなった？</td><td>解説の図の描き方を見たら急に理解できた</td></tr>
+          <tr><td style="text-align:center;">×</td><td>どこから分からなくなった？</td><td>文章の意味がまず分からなかった…</td></tr>
+        </table>
+
+        <h3>振り返りノートの書かせ方</h3>
+        <table class="level-table">
+          <tr><th>ノート欄</th><th>書かせ方の例</th></tr>
+          <tr><td>わかったこと</td><td>符号を見落としていた ⇒ 式を書いたら符号にマークする</td></tr>
+          <tr><td>まだわからないこと</td><td>速さの公式の使い分けがまだ不安</td></tr>
+        </table>
+
+        <h3>講師の声掛け（書かせ方指導）</h3>
+        <div class="info">
+          「ヒントのどこで分かったのか、一言でいいから書いてみよう」<br>
+          「迷いやすいところ、まだ不安なことを書いておくと次に役立つよ」
+        </div>
+
+        <div class="note"><strong>まとめ：</strong>「〇△×チェック」は"正答率の記録"ではなく、"思考過程の見取り"。ケアレスミスは△ゾーンに潜む。そこを原因分析→行動改善につなげることが、真の学力向上への近道。</div>
       </div></div>
 
       <!-- 生徒カウンセリング -->
@@ -1014,7 +1076,7 @@ const PT={
   absent:['教室長不在時の対応','業務マニュアル'],
   kyukyu:['即・教室長に報告すること','緊急時対応'],
   zaseki:['座席表にいない生徒が来たとき','緊急時対応'],
-  benkyonosikata:['勉強の仕方','教務知識'],counseling:['生徒カウンセリング','カウンセリング'],flow:['振り返り授業の流れ','授業・教材'],'note-shido':['ノート指導','授業・教材'],
+  benkyonosikata:['勉強の仕方','教務知識'],'sankaku-check':['〇△×チェック・ケアレスミス分析','教務知識'],counseling:['生徒カウンセリング','カウンセリング'],flow:['振り返り授業の流れ','授業・教材'],'note-shido':['ノート指導','授業・教材'],
   '3kinds':['明光の3つの授業','授業・教材'],policy:['授業運営方針','授業・教材'],
   clamas:['ClaMaS 入力ガイド','授業・教材'],roleplay:['授業ロープレ','授業・教材'],
   quiz:['小テスト','授業・教材'],
