@@ -192,7 +192,7 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
       </div>
       <div class="nav-section">
         <div class="nav-label">カウンセリング</div>
-        <button class="nav-btn" onclick="sp('counseling',this)"><span class="ndot"></span>生徒カウンセリング</button>
+        <button class="nav-btn" onclick="sp('counseling',this)"><span class="ndot"></span>目標設定カウンセリング</button>
       </div>
       <div class="nav-section">
         <div class="nav-label">授業・教材</div>
@@ -536,13 +536,21 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
 
       <!-- 生徒カウンセリング -->
       <div class="panel" id="p-counseling"><div class="article">
-        <h3>生徒カウンセリング</h3>
+        <h3>目標設定カウンセリング</h3>
+        <ul>
+          <li>「学習振り返り・目標設定シート」を使って、月初めに先月の学習目標の達成度を確認して、今月の学習目標を生徒に決めてもらう</li>
+          <li>書いてもらったシートをもとに、講師が生徒と一緒に書いた内容を確認しながら学習相談をする</li>
+          <li>必要に応じて、講師から生徒への学習アドバイスや具体的な行動を決めていく</li>
+          <li>決めたことを保護者へ共有し、面倒見を伝える</li>
+        </ul>
 
         <h3>目的</h3>
-        <ul>
-          <li>生徒のモチベーションの管理</li>
-          <li>保護者への面倒見の伝達</li>
-        </ul>
+        <div class="info">
+          <ul style="margin:0; padding-left:20px;">
+            <li>生徒のモチベーションの管理</li>
+            <li>保護者への面倒見の伝達</li>
+          </ul>
+        </div>
 
         <h3>内容・流れ</h3>
         <ul>
@@ -1076,7 +1084,7 @@ const PT={
   absent:['教室長不在時の対応','業務マニュアル'],
   kyukyu:['即・教室長に報告すること','緊急時対応'],
   zaseki:['座席表にいない生徒が来たとき','緊急時対応'],
-  benkyonosikata:['勉強の仕方','教務知識'],'sankaku-check':['〇△×チェック・ケアレスミス分析','教務知識'],counseling:['生徒カウンセリング','カウンセリング'],flow:['振り返り授業の流れ','授業・教材'],'note-shido':['ノート指導','授業・教材'],
+  benkyonosikata:['勉強の仕方','教務知識'],'sankaku-check':['〇△×チェック・ケアレスミス分析','教務知識'],counseling:['目標設定カウンセリング','カウンセリング'],flow:['振り返り授業の流れ','授業・教材'],'note-shido':['ノート指導','授業・教材'],
   '3kinds':['明光の3つの授業','授業・教材'],policy:['授業運営方針','授業・教材'],
   clamas:['ClaMaS 入力ガイド','授業・教材'],roleplay:['授業ロープレ','授業・教材'],
   quiz:['小テスト','授業・教材'],
