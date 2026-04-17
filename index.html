@@ -175,6 +175,30 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <button class="nav-btn" onclick="sp('rules',this)"><span class="ndot"></span>教室のルール</button>
       </div>
       <div class="nav-section">
+        <div class="nav-label">科目別指導マニュアル</div>
+        <button class="nav-btn" onclick="sp('sm-1vs3',this)"><span class="ndot"></span>1対3授業の動かし方</button>
+        <div class="tree-group">
+          <button class="tree-parent" onclick="tt('tsm-sho',this)">
+            <span class="tree-arrow" id="tsm-sho-a">▶</span>
+            <span class="tree-parent-label">小学生</span>
+          </button>
+          <div class="tree-children" id="tsm-sho">
+            <button class="tree-leaf" onclick="sp('sm-sho-kokugo',this)">国語の指導</button>
+            <button class="tree-leaf" onclick="sp('sm-sho-sansu',this)">算数の指導</button>
+          </div>
+        </div>
+        <div class="tree-group">
+          <button class="tree-parent" onclick="tt('tsm-chu',this)">
+            <span class="tree-arrow" id="tsm-chu-a">▶</span>
+            <span class="tree-parent-label">中学生</span>
+          </button>
+          <div class="tree-children" id="tsm-chu">
+            <button class="tree-leaf" onclick="sp('sm-chu-eigo',this)">英語の指導</button>
+            <button class="tree-leaf" onclick="sp('sm-chu-sugaku',this)">数学の指導</button>
+          </div>
+        </div>
+      </div>
+      <div class="nav-section">
         <div class="nav-label">業務マニュアル</div>
         <button class="nav-btn" onclick="sp('tel',this)"><span class="ndot"></span>電話対応</button>
         <button class="nav-btn" onclick="sp('visitor',this)"><span class="ndot"></span>来客対応</button>
@@ -744,6 +768,346 @@ body { font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', san
         <ul><li>振り返り授業の流れを理解する</li><li>1対2の授業を円滑に回せるようにする</li><li>楽しく授業する</li></ul>
       </div></div>
 
+      <!-- ===== 科目別指導マニュアル ===== -->
+
+      <!-- 1対3授業の動かし方 -->
+      <div class="panel" id="p-sm-1vs3"><div class="article">
+        <h3>1対3授業の基本原則</h3>
+        <p>個別指導の価値は「先生が教える時間」ではなく「生徒が考え、動いている時間」の質と量で決まります。1対3では1人にかけられる時間は物理的に限られます。だからこそ、<strong>短い接触を均等に・高頻度で回すこと</strong>が最大のポイントです。</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+          <div class="important" style="margin:0;">
+            <strong>❌ やりがちなNG</strong><br><br>
+            1人の生徒に5〜10分かけて丁寧に説明する<br>
+            → 残り2人は完全に止まって待ち状態
+          </div>
+          <div class="info" style="margin:0;background:#E8F5E9;color:#1B5E20;">
+            <strong>⭕ 目指す姿</strong><br><br>
+            1人あたり1〜2分の接触を、90分で何度も回す<br>
+            → 3人全員が常に「手が動いている」状態
+          </div>
+        </div>
+
+        <h3>90分の時間設計</h3>
+        <table class="level-table">
+          <tr><th>時間帯</th><th>講師のアクション</th><th>3人の状態</th></tr>
+          <tr><td><strong>開始〜5分</strong><br>確認テスト</td><td>全員に確認テストを一斉配布。テスト中に採点準備・問題選定</td><td>3人全員がテストに取り組んでいる</td></tr>
+          <tr><td><strong>5〜20分</strong><br>単元導入</td><td>1人に解説しながら他の2人も聞けるよう少し声量を上げる。「聞こえてたら一緒にやってみて」と巻き込む</td><td>解説を聞きながらノートに写している</td></tr>
+          <tr><td><strong>20〜70分</strong><br>問題演習・巡回</td><td>3人の間を1〜2分ペースで巡回。止まっている生徒に短く声をかけて再起動</td><td>各自のペースで演習。講師が来るたびに確認</td></tr>
+          <tr><td><strong>70〜85分</strong><br>間違い直し・振り返り</td><td>丸付けが終わった生徒から△×の解き直しを指示。振り返りノートへ順次移行</td><td>丸付け→解き直し→振り返りノートの流れで自走</td></tr>
+          <tr><td><strong>85〜90分</strong><br>宿題提示・締め</td><td>全員に宿題範囲を伝える（個別調整が必要な場合は一言添える）</td><td>宿題内容を確認してノートに記入</td></tr>
+        </table>
+
+        <h3>巡回の動き方 ─ 接触回数を最大化する ─</h3>
+        <div class="info">巡回は「困っている生徒を探す」のではなく、<strong>「全員に定期的に来る」</strong>ことが原則。困っていなくても声をかけることで、生徒は「見られている」と感じ集中が維持されます。</div>
+        <table class="level-table">
+          <tr><th>場面</th><th>対応</th></tr>
+          <tr><td><strong>巡回ペース</strong></td><td>1人あたり1〜2分を目安に3人をぐるぐる回る。同じ生徒に3分以上連続でつかない</td></tr>
+          <tr><td><strong>接触の内容</strong></td><td>「どこまで解けた？」「この問題なんで×にした？」など短い確認で十分</td></tr>
+          <tr><td><strong>止まっている生徒</strong></td><td>「どこで詰まった？」と聞いてヒントだけ出し、すぐ次の生徒へ。答えは言わない</td></tr>
+          <tr><td><strong>早く終わった生徒</strong></td><td>次の問題・振り返りノート・宿題の先取りを即指示して止まらせない</td></tr>
+          <tr><td><strong>遅い生徒</strong></td><td>問題数を減らして正答率を優先。「全部やらなくていい、この3問だけやって」</td></tr>
+          <tr><td><strong>自習状態になった生徒</strong></td><td>「ここまで解けたら教えて」と次の接触タイミングを予告してから離れる</td></tr>
+        </table>
+
+        <h3>3人同時に手が挙がったときの優先順位</h3>
+        <table class="level-table">
+          <tr><th>優先順位</th><th>判断基準</th><th>具体的な対応</th></tr>
+          <tr><td>① まず全員に声をかける</td><td>誰も無視しない</td><td>「ちょっと待ってて、すぐ行くよ」と全員に一言</td></tr>
+          <tr><td>② 一番止まっている生徒から</td><td>手が完全に止まっている</td><td>ヒントだけ出してすぐ離れる。「この部分だけ考えてみて」</td></tr>
+          <tr><td>③ 共通のつまずきは一斉解説</td><td>2〜3人が同じ問題で詰まっている</td><td>「3人とも聞いて」と声をかけ、その問題だけ短く一斉解説</td></tr>
+          <tr><td>④ 長い解説は後回し</td><td>理解に時間がかかる内容</td><td>「後でゆっくり説明するから、次の問題に進んでて」と先送り宣言</td></tr>
+        </table>
+
+        <h3>生徒を「自走」させるための仕掛け</h3>
+        <ul>
+          <li><strong>授業開始時に全体像を伝える</strong>：「今日はこの範囲をやって、最後に振り返りノートを書くよ」と最初に全員へ</li>
+          <li><strong>問題に蛍光ペンでマーキング</strong>：「この問題だけやって」と範囲を絞ることで、止まりにくくなる</li>
+          <li><strong>丸付けは生徒自身に</strong>：講師が丸付けをすると生徒が止まる。自分でやらせて〇△×チェックまで習慣化</li>
+          <li><strong>「終わったら次はコレ」を決めておく</strong>：解き終わりの行動を事前に伝えておく（振り返りノート・宿題先取りなど）</li>
+          <li><strong>ノートの書き方を最初に徹底</strong>：途中式・丸付け・チェックが分かっていれば講師なしで動ける時間が増える</li>
+        </ul>
+
+        <h3>やりがちなNG行動</h3>
+        <div class="important">以下のNG行動は授業の質を大きく下げます。自分の授業を振り返るチェックリストとして使ってください。</div>
+        <table class="level-table">
+          <tr><th>NG行動</th><th>何が起きるか</th><th>正しい対応</th></tr>
+          <tr><td>1人に5分以上つきっきりになる</td><td>他の2人が完全に止まり、自習と変わらない授業になる</td><td>1〜2分で切り上げ、「続きはまた来るね」と離れる</td></tr>
+          <tr><td>「わかった？」だけで確認を終える</td><td>分かっていなくても「はい」と言う生徒が多い</td><td>「じゃあ次の問題、自分でやってみて」と実際に解かせて確認</td></tr>
+          <tr><td>答えをすぐ教える</td><td>生徒が考えることをやめ、講師が来るまで待つようになる</td><td>「ここまではどう？」とヒントを段階的に出す</td></tr>
+          <tr><td>止まっている生徒を後回しにし続ける</td><td>その生徒だけ全く進まず、保護者クレームにつながる</td><td>短くてもいいので必ず均等に接触する</td></tr>
+          <tr><td>宿題の説明を最後に急いでまとめてやる</td><td>生徒が内容を把握しきれず宿題未実施につながる</td><td>演習中に「今日の宿題はここから出すよ」と予告しながら進める</td></tr>
+        </table>
+
+        <h3>学力層が混在する場合の対応</h3>
+        <table class="level-table">
+          <tr><th>状況</th><th>対応</th></tr>
+          <tr><td><strong>進度の差が出る</strong></td><td>早い生徒に「次の問題へ」と指示し、遅い生徒に合わせて止めない。個別進度管理が基本</td></tr>
+          <tr><td><strong>教材が違う</strong></td><td>生徒ごとに教材・ページが異なっても問題なし。「あなたはここ、あなたはここ」と最初に明示</td></tr>
+          <tr><td><strong>集中力の差がある</strong></td><td>集中が切れた生徒を優先して巡回。「ここまで解いたら教えて」と次のゴールを設定</td></tr>
+        </table>
+      </div></div>
+
+      <!-- 小学生 国語の指導 -->
+      <div class="panel" id="p-sm-sho-kokugo"><div class="article">
+        <h3>国語指導の目的と基本方針</h3>
+        <p>国語は「すべての教科の土台」です。読解力・語彙力・表現力は算数の文章題から社会の資料読解まであらゆる学習に影響します。単に答えを出すのではなく、<strong>「なぜそう読めるのか」を言語化させること</strong>が国語指導の核心です。</p>
+        <table class="level-table">
+          <tr><th>目標</th><th>内容</th></tr>
+          <tr><td>目標①</td><td>文章を正確に読む力（読解力）の育成</td></tr>
+          <tr><td>目標②</td><td>語彙・漢字の定着（日常的な反復）</td></tr>
+          <tr><td>目標③</td><td>自分の考えを文章で表現できる力の育成</td></tr>
+          <tr><td>指導姿勢</td><td>「答えが合っているか」より「どこから読み取ったか」を重視する</td></tr>
+        </table>
+
+        <h3>学力層別の指導アプローチ</h3>
+        <table class="level-table">
+          <tr><th>学力層</th><th>授業で重視すること</th><th>よくある課題と対応</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span><span class="lvl b-blue" style="margin-left:4px;">BASIC</span></td><td>教科書レベルの語彙・漢字の定着／短い文章から読み取る練習／「何が書いてある？」を口頭確認</td><td>長い文章で集中が切れる → 段落ごとに区切って読む<br>漢字の書き間違いが多い → 空書き・指書き指導を入れる</td></tr>
+          <tr><td><span class="lvl b-amber">STANDARD</span><span class="lvl b-green" style="margin-left:4px;">PROGRESS</span></td><td>根拠を示しながら答えを選ぶ力／記述問題への対応／文章全体の構造把握</td><td>「なんとなく」で選んでしまう → 傍線部前後の確認を習慣化<br>記述が短すぎる → 字数の目安と構成メモを指導</td></tr>
+        </table>
+
+        <h3>読解問題の指導ステップ</h3>
+        <div class="info">★ 生徒に発問し考え方を引き出す、生徒主体の学びを意識してください。</div>
+        <table class="level-table">
+          <tr><th>ステップ</th><th>講師の行動</th><th>生徒への声かけ例</th></tr>
+          <tr><td>① 本文音読</td><td>生徒に音読させる。難語はその場で説明</td><td>「声に出して読んでみよう」「知らない言葉はある？」</td></tr>
+          <tr><td>② 段落メモ</td><td>各段落に1〜2語でメモさせる。「つまり何の話？」と確認</td><td>「この段落、ひとことで言うと？」</td></tr>
+          <tr><td>③ 問題演習</td><td>傍線部に戻って根拠を探す習慣。選択肢は消去法で</td><td>「この答え、どこに書いてあった？」</td></tr>
+          <tr><td>④ 解説</td><td>間違えた理由を言語化させる。正解の根拠を本文で確認</td><td>「なぜこっちを選んだの？」「正しい答えの根拠は？」</td></tr>
+          <tr><td>⑤ まとめ</td><td>振り返りノートに気づきを記入</td><td>「今日わかるようになったことは？」</td></tr>
+        </table>
+
+        <h3>漢字・語句指導のポイント</h3>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>書き取り</td><td>ノートに3回書かせる（「ゆっくり・丁寧に」を必ず伝える）</td></tr>
+          <tr><td>意味理解</td><td>漢字の意味が分からない場合は例文ごと覚えさせる</td></tr>
+          <tr><td>語彙強化</td><td>「この言葉、使えそうな場面は？」と日常と結びつける</td></tr>
+          <tr><td>NG行動</td><td>漢字をただ「書かせるだけ」では定着しない。必ず声に出させる</td></tr>
+        </table>
+
+        <h3>作文・記述指導のポイント</h3>
+        <div class="note">作文・記述は「何を書けばいいか分からない」と止まる生徒が多い。まず口頭で言わせてからノートに書かせると効果的。</div>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>基本構成</td><td>①主張 → ②理由・根拠 → ③まとめ（3段落構成）を教える</td></tr>
+          <tr><td>口頭先行法</td><td>「口で言えること」を先にやらせてからノートに写させる</td></tr>
+          <tr><td>字数配分</td><td>例）200字：主張50字・理由100字・まとめ50字 の目安を提示</td></tr>
+          <tr><td>NG指導</td><td>「もっと書いて」だけでは書けない。「理由を1つ足して」と具体的に</td></tr>
+        </table>
+
+        <h3>よくある生徒のつまずきと対応</h3>
+        <table class="level-table">
+          <tr><th>つまずきパターン</th><th>原因</th><th>対応策</th></tr>
+          <tr><td>文章が長くて読めない</td><td>語彙不足・集中力低下</td><td>段落ごとに「ひとこと要約」を口頭でさせる</td></tr>
+          <tr><td>選択肢を「なんとなく」で選ぶ</td><td>消去法が身についていない</td><td>「違う選択肢のどこが違う？」と1つずつ確認</td></tr>
+          <tr><td>記述が書けない</td><td>構成・内容のイメージがない</td><td>口頭で言わせてから書かせる。構成メモを先に作る</td></tr>
+          <tr><td>漢字が覚えられない</td><td>意味を理解せず形だけ覚えている</td><td>読み方と意味を必ずセットにして確認</td></tr>
+          <tr><td>音読がつっかえる</td><td>語彙不足・読み慣れていない</td><td>難語に線を引いて、先に意味を確認してから音読</td></tr>
+        </table>
+
+        <h3>教材の使い方（明光式！ワーク）</h3>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>授業範囲</td><td>（2）読解問題のみ授業で扱う。（1）漢字・語句は宿題</td></tr>
+          <tr><td>宿題の出し方</td><td>漢字の意味調べがあるページは必ず自宅実施。ノートに意味と例文を書かせる</td></tr>
+          <tr><td>正答率管理</td><td>7割正解になるよう問題を選定。蛍光ペンでマーキングしてから取り組ませる</td></tr>
+          <tr><td>丸付け</td><td>生徒自身にやらせる。〇△×チェックの習慣をつける</td></tr>
+        </table>
+      </div></div>
+
+      <!-- 小学生 算数の指導 -->
+      <div class="panel" id="p-sm-sho-sansu"><div class="article">
+        <h3>算数指導の目的と基本方針</h3>
+        <p>算数は「正解を出すこと」ではなく<strong>「なぜその式になるかを説明できること」</strong>が目標です。計算が速くても意味を理解していない生徒は中学数学で必ずつまずきます。式・図・言葉の3つで理解させることを意識してください。</p>
+        <table class="level-table">
+          <tr><th>目標</th><th>内容</th></tr>
+          <tr><td>目標①</td><td>式を立てる力（問題文から数量関係を把握する）</td></tr>
+          <tr><td>目標②</td><td>図・表・グラフを使って考える力</td></tr>
+          <tr><td>目標③</td><td>計算の正確さとスピードの両立</td></tr>
+          <tr><td>指導姿勢</td><td>「答えが合ってる？」より「なぜその式になる？」を先に問う</td></tr>
+        </table>
+
+        <h3>学力層別の指導アプローチ</h3>
+        <table class="level-table">
+          <tr><th>学力層</th><th>授業で重視すること</th><th>よくある課題と対応</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span><span class="lvl b-blue" style="margin-left:4px;">BASIC</span></td><td>計算の手順を1ステップずつ確認／問題文を図・絵で表させる</td><td>計算ミスが多い → 式と計算を分けてノートに書かせる<br>問題文が読めない → 数値に〇、求めるものに△を書かせる</td></tr>
+          <tr><td><span class="lvl b-amber">STANDARD</span><span class="lvl b-green" style="margin-left:4px;">PROGRESS</span></td><td>複数の解き方を比較させる／「なぜ」を説明させる</td><td>途中式を書かない → 「途中式がないと半分しかわからない」と伝える<br>文章題で式が立てられない → 数量関係を図にしてから式を立てる</td></tr>
+        </table>
+
+        <h3>算数授業の進め方</h3>
+        <table class="level-table">
+          <tr><th>ステップ</th><th>講師の行動</th><th>声かけ例</th></tr>
+          <tr><td>① 例題解説</td><td>例題を生徒と一緒に読む。図・表を使って紙に書いて説明</td><td>「この問題、図にするとどうなる？」</td></tr>
+          <tr><td>② 確認問題</td><td>同タイプを1問だけ一人でやらせる</td><td>「さっきと同じやり方でやってみよう」</td></tr>
+          <tr><td>③ 演習</td><td>問題を選定して取り組ませる。途中式のノート書きを確認</td><td>「式から書いてね。計算は次の行に」</td></tr>
+          <tr><td>④ 間違い直し</td><td>なぜ間違えたかを言語化させる</td><td>「どこで間違えたか、分かる？」</td></tr>
+          <tr><td>⑤ まとめ</td><td>今日習ったことを一言で言わせる</td><td>「今日のポイントは何だった？」</td></tr>
+        </table>
+
+        <h3>単元別 つまずきポイントと指導法</h3>
+        <table class="level-table">
+          <tr><th>単元</th><th>つまずきパターン</th><th>指導のポイント</th></tr>
+          <tr><td>かけ算・わり算</td><td>九九の不定着、あまりの概念</td><td>九九カード活用。「あまり」は線分図で視覚化</td></tr>
+          <tr><td>分数</td><td>分母・分子の役割理解不足</td><td>ピザや折り紙を使って「等分」のイメージから入る</td></tr>
+          <tr><td>小数</td><td>位取りの混乱</td><td>方眼紙に小数点を書いて位取りを視覚化する</td></tr>
+          <tr><td>面積・体積</td><td>公式の意味理解不足</td><td>実際に1cm×1cmを書いて「タイルを数える」ところから</td></tr>
+          <tr><td>速さ</td><td>3量の関係が混乱</td><td>「みはじ」の三角形を書き、問われている量を隠して考えさせる</td></tr>
+          <tr><td>割合</td><td>「もとにする量」の理解不足</td><td>日常の場面（セール価格）に置き換えて考えさせる</td></tr>
+          <tr><td>文章題全般</td><td>問題文から式が立てられない</td><td>数値に〇、求めるものに△を書いてから図を描かせる</td></tr>
+        </table>
+
+        <h3>ノート指導・計算指導のポイント</h3>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>式と計算の分離</td><td>式を書いてから改行して計算。「式がないノートは採点できない」と伝える</td></tr>
+          <tr><td>途中式</td><td>省略しない習慣。「途中式は自分のために書く」と教える</td></tr>
+          <tr><td>単位の記入</td><td>答えに単位を書く癖をつける（cm、m²、個など）</td></tr>
+          <tr><td>見直し習慣</td><td>「答えを問題文に戻して確認する」ステップを習慣化する</td></tr>
+        </table>
+
+        <h3>教材の使い方（明光式！ワーク）</h3>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>例題</td><td>講師が解説し、生徒に「もう一度自分で言わせる」確認を行う</td></tr>
+          <tr><td>たしかめよう</td><td>授業進度に応じて問題を抜粋。全問やる必要はない</td></tr>
+          <tr><td>宿題設定</td><td>授業で扱った単元と同じ難易度か易しいものを選定する</td></tr>
+          <tr><td>正答率</td><td>7割正解を目安に問題選定。蛍光ペンでマーキングしてから取り組ませる</td></tr>
+        </table>
+      </div></div>
+
+      <!-- 中学生 英語の指導 -->
+      <div class="panel" id="p-sm-chu-eigo"><div class="article">
+        <h3>英語指導の目的と基本方針</h3>
+        <p>中学英語は「文法の理解」と「語彙の定着」が両輪です。文法を知らないと文が作れず、語彙がないと文法があっても意味がない。一方で、<strong>「英語が怖い」「間違えたくない」という心理的障壁を取り除くこと</strong>も重要な指導です。</p>
+        <table class="level-table">
+          <tr><th>目標</th><th>内容</th></tr>
+          <tr><td>目標①</td><td>文の仕組み（語順・品詞の役割）の理解</td></tr>
+          <tr><td>目標②</td><td>1400語レベルの語彙定着（読む・書く・聞く）</td></tr>
+          <tr><td>目標③</td><td>英文を見た瞬間に構造を把握できる速読力</td></tr>
+          <tr><td>指導姿勢</td><td>「間違えてもOK」の安心感を作りながら、正確さを育てる</td></tr>
+        </table>
+
+        <h3>学力層別の指導アプローチ</h3>
+        <table class="level-table">
+          <tr><th>学力層・教材</th><th>授業で重視すること</th><th>よくある課題と対応</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span><br><small>フォレスタ</small></td><td>be動詞と一般動詞の区別／肯定→否定→疑問の変換パターン／基本文を書けるようにする</td><td>語順が毎回バラバラ → SVO構造を毎回確認<br>単語が覚えられない → 発音しながら書く方法を教える</td></tr>
+          <tr><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span><br><small>iワーク＋講習テキストマスター</small></td><td>文法のルールと例外パターンの定着／英作文（基本文→応用文）／iワーク実施単元の定着確認</td><td>和訳はできるが英作文が書けない → 日本語→英語の変換練習を増やす<br>宿題（マスター）をやってこない → 難易度を調整して正答率70%を維持</td></tr>
+          <tr><td><span class="lvl b-green">PROGRESS</span><br><small>発展新演習＋ウイニング</small></td><td>入試レベルの長文読解・英作文／文法の応用・例外パターンの完全定着／学校の授業は本人に任せ発展・入試対策に集中</td><td>長文で時間が足りない → スキャニング・スキミングを教える<br>英作文の表現が単調 → 採点基準に沿った表現パターンを複数覚えさせる</td></tr>
+        </table>
+
+        <h3>単語テスト・語彙指導のポイント</h3>
+        <div class="info">英語の最大の土台は語彙。単語テストを毎回実施し、「覚えてくる→テスト→やり直し」のサイクルを確立させる。</div>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>単語テストの方法</td><td>日本語→英語の記述テスト（英→日は補助的に）。合格点は7割</td></tr>
+          <tr><td>覚え方の指導</td><td>「発音しながら書く」「例文で覚える」方法を明示的に教える</td></tr>
+          <tr><td>不合格の対処</td><td>その場で3回書き直し＋次回授業で再テスト</td></tr>
+          <tr><td>語彙ターゲット</td><td>頻出度別英単語リスト1400を宿題の副教材として活用</td></tr>
+          <tr><td>NG行動</td><td>「覚えてきてね」だけでは覚え方が分からない生徒が多い。必ず方法を教える</td></tr>
+        </table>
+
+        <h3>文法指導ステップ</h3>
+        <table class="level-table">
+          <tr><th>ステップ</th><th>講師の行動</th><th>声かけ例</th></tr>
+          <tr><td>① 確認テスト</td><td>単語テスト実施・採点・その場でやり直し</td><td>「7割取れた？NG単語は今すぐ3回書いて」</td></tr>
+          <tr><td>② 文法導入</td><td>新しい文法のルールを図・表・色分けで視覚的に説明</td><td>「この文、be動詞はどこ？」</td></tr>
+          <tr><td>③ 例文確認</td><td>基本例文をノートに書かせ、意味と構造を確認</td><td>「この文の主語はどれ？動詞は？」</td></tr>
+          <tr><td>④ 問題演習</td><td>基本問題→標準問題の順。英作文は日本語メモ→英文の順で</td><td>「日本語で言うとどういう意味？」「それを英語にすると？」</td></tr>
+          <tr><td>⑤ まとめ</td><td>今日の文法ルールを生徒自身に言わせる</td><td>「今日習ったルール、一言で言うと？」</td></tr>
+        </table>
+
+        <h3>単元別 つまずきと指導法</h3>
+        <table class="level-table">
+          <tr><th>単元</th><th>つまずきパターン</th><th>指導のポイント</th></tr>
+          <tr><td>be動詞 vs 一般動詞</td><td>混在して使ってしまう</td><td>「be動詞は『＝』、一般動詞は動作」と視覚的に区別</td></tr>
+          <tr><td>3単現のs</td><td>つけ忘れ・つけ間違い</td><td>「He/She/It＋動詞」のパターンカードを作らせる</td></tr>
+          <tr><td>過去形・過去進行形</td><td>不規則動詞の暗記不足</td><td>規則動詞リストと不規則変化リストを分けて管理</td></tr>
+          <tr><td>不定詞・動名詞</td><td>用法の混乱</td><td>「to＋動詞＝これから」「動名詞＝過去・習慣」で区別</td></tr>
+          <tr><td>比較級・最上級</td><td>不規則変化のミス</td><td>比較フレーズ（than/of/in）とセットで覚えさせる</td></tr>
+          <tr><td>受動態</td><td>能動態と受動態の変換ミス</td><td>「主語が変わる」ことを矢印で視覚化</td></tr>
+          <tr><td>英作文全般</td><td>語順が日本語になる</td><td>SVO構造を毎回確認。「主語→動詞→目的語」の順番を口頭でも言わせる</td></tr>
+        </table>
+
+        <h3>教材の使い方</h3>
+        <table class="level-table">
+          <tr><th>教材</th><th>対象</th><th>使い方</th></tr>
+          <tr><td><strong>フォレスタ</strong></td><td><span class="lvl b-gray">NEO</span>のみ</td><td>Warm Up→Try まで授業で実施。Key Wordsは宿題として出し、次回授業でテスト</td></tr>
+          <tr><td><strong>iワーク</strong></td><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span></td><td>★マーク問題中心に進める。新出単語→基本問題→練習問題の順</td></tr>
+          <tr><td><strong>講習テキストマスター</strong><br>（宿題用）</td><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span></td><td>iワークで実施した単元＋関連既習単元を宿題として出す。難易度は正答率70%目安で選定<br><small>例）不定詞を授業でやった→マスターから不定詞・動名詞も宿題に</small></td></tr>
+          <tr><td><strong>発展新演習</strong><br>（主教材）</td><td><span class="lvl b-green">PROGRESS</span></td><td>入試レベルの問題演習が中心。学校進度は本人に任せ、既習単元の発展・入試対策を全面的に実施</td></tr>
+          <tr><td><strong>ウイニング</strong><br>（副教材）</td><td><span class="lvl b-green">PROGRESS</span></td><td>発展新演習と並行して使用。入試頻出テーマの補強・演習量の確保に活用</td></tr>
+        </table>
+      </div></div>
+
+      <!-- 中学生 数学の指導 -->
+      <div class="panel" id="p-sm-chu-sugaku"><div class="article">
+        <h3>数学指導の目的と基本方針</h3>
+        <p>中学数学は「計算できる」だけでは不十分です。定期テストで高得点を取るには、解法の仕組みを理解し問題の型を見抜く力が必要です。<strong>「公式を丸暗記」から「なぜその公式になるかを説明できる」</strong>指導を目指してください。</p>
+        <table class="level-table">
+          <tr><th>目標</th><th>内容</th></tr>
+          <tr><td>目標①</td><td>計算の正確さとスピード（途中式を書く習慣）</td></tr>
+          <tr><td>目標②</td><td>文字式・方程式・関数の概念理解（なぜそうなるか）</td></tr>
+          <tr><td>目標③</td><td>図形の性質と証明問題への対応</td></tr>
+          <tr><td>指導姿勢</td><td>「答えを教える」前に「どう考えたの？」を必ず聞く</td></tr>
+        </table>
+
+        <h3>学力層別の指導アプローチ</h3>
+        <table class="level-table">
+          <tr><th>学力層・教材</th><th>授業で重視すること</th><th>よくある課題と対応</th></tr>
+          <tr><td><span class="lvl b-gray">NEO</span><br><small>フォレスタ</small></td><td>正負の数・文字式の基礎固め／1ステップずつ計算を確認／「なぜその答え？」を口頭確認</td><td>符号ミスが多い → 式を展開するとき符号を声に出させる<br>方程式が解けない → 「移項は符号が変わる」を毎回確認</td></tr>
+          <tr><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span><br><small>iワーク＋講習テキストマスター</small></td><td>公式の意味理解（丸暗記ではなく「なぜ」を言える）／途中式を書く習慣の定着／iワーク実施単元の既習内容をマスターで復習</td><td>宿題（マスター）の正答率が低い → 難易度を下げて基礎問題中心に選定<br>文章題で式が立てられない → 数量関係を図に書いてから式を立てさせる</td></tr>
+          <tr><td><span class="lvl b-green">PROGRESS</span><br><small>発展新演習＋ウイニング</small></td><td>入試レベルの応用・発展問題演習／証明問題の記述力強化／学校の授業は本人に任せ、既習単元の発展・入試対策に集中</td><td>証明が書けない → 「仮定→根拠→結論」の3段論法を型で教える<br>図形問題で補助線が引けない → 既習の定理リストを確認しながら考えさせる</td></tr>
+        </table>
+
+        <h3>数学授業の進め方</h3>
+        <table class="level-table">
+          <tr><th>ステップ</th><th>講師の行動</th><th>声かけ例</th></tr>
+          <tr><td>① 確認テスト</td><td>前回の重要事項を口頭 or 小テストで確認</td><td>「前回やった公式、言える？」</td></tr>
+          <tr><td>② 例題解説</td><td>例題を図・式で紙に書きながら解説。「なぜそうなるか」を必ず言葉にする</td><td>「この式、なぜ左辺に移項するの？」</td></tr>
+          <tr><td>③ 確認問題</td><td>同タイプを1問だけ一人でやらせる</td><td>「さっきと同じ考え方でやってみて」</td></tr>
+          <tr><td>④ 演習</td><td>★問題を中心に取り組ませる。途中式のノート書きを確認</td><td>「途中式全部書いて。採点するよ」</td></tr>
+          <tr><td>⑤ 間違い直し</td><td>「どのステップが違ったか」を確認。計算ミスか概念ミスかを区別</td><td>「式は合ってる？計算は？どこで間違えた？」</td></tr>
+          <tr><td>⑥ まとめ</td><td>今日の重要事項を生徒が言う</td><td>「今日のポイントをノートにまとめて」</td></tr>
+        </table>
+
+        <h3>単元別 つまずきと指導法</h3>
+        <table class="level-table">
+          <tr><th>単元</th><th>つまずきパターン</th><th>指導のポイント</th></tr>
+          <tr><td>正負の数</td><td>符号ミス・絶対値の意味不明</td><td>数直線を使って「−3は0から左に3」を視覚化</td></tr>
+          <tr><td>文字式</td><td>文字の意味が理解できていない</td><td>「x＝□」と置き換えて考えさせる</td></tr>
+          <tr><td>一次方程式</td><td>移項の符号ミス</td><td>「移項＝反対側に渡すと＋↔−が逆になる」と繰り返す</td></tr>
+          <tr><td>連立方程式</td><td>加減法・代入法の使い分け</td><td>「係数が同じなら加減法、＝の形があれば代入法」と選択基準を教える</td></tr>
+          <tr><td>一次関数</td><td>傾きと切片の読み取りミス</td><td>グラフと式を必ず両方書かせる</td></tr>
+          <tr><td>平方根</td><td>√の計算ルールの混乱</td><td>√の中の数の大小と計算ルールを表にして整理</td></tr>
+          <tr><td>二次方程式</td><td>因数分解か解の公式かの判断</td><td>「因数分解を先に試す→無理なら解の公式」の手順を徹底</td></tr>
+          <tr><td>証明</td><td>書き方が分からない</td><td>「仮定（条件）→根拠（定理）→結論」のテンプレートを教える</td></tr>
+          <tr><td>図形全般</td><td>補助線が思いつかない</td><td>「二等辺三角形・平行線・円周角」など定理リストを確認する習慣</td></tr>
+        </table>
+
+        <h3>途中式・ノート指導</h3>
+        <div class="important">「途中式を書かない習慣」は中3以降で必ず崩れます。今から全過程を書く習慣をつけさせてください。</div>
+        <table class="level-table">
+          <tr><th>項目</th><th>内容</th></tr>
+          <tr><td>途中式は必須</td><td>答えだけ書く習慣は中3以降で必ず崩れる。今から全過程を書く習慣を</td></tr>
+          <tr><td>符号の扱い</td><td>展開・移項のたびに符号を声に出させる。視覚化が効果的</td></tr>
+          <tr><td>等号の縦揃え</td><td>ノートの等号を縦に揃えると間違いを発見しやすい</td></tr>
+          <tr><td>単位・条件メモ</td><td>文章題では「分かっていること」を箇条書きにしてから式を立てる</td></tr>
+        </table>
+
+        <h3>教材の使い方</h3>
+        <table class="level-table">
+          <tr><th>教材</th><th>対象</th><th>使い方</th></tr>
+          <tr><td><strong>フォレスタ</strong></td><td><span class="lvl b-gray">NEO</span>のみ</td><td>Warm Upの例題を一緒に確認→Tryで演習。Exerciseは宿題</td></tr>
+          <tr><td><strong>iワーク</strong></td><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span></td><td>例題→基本問題→標準問題の順。★マーク中心。まとめの問題ABは授業で実施</td></tr>
+          <tr><td><strong>講習テキストマスター</strong><br>（宿題用）</td><td><span class="lvl b-blue">BASIC</span><span class="lvl b-amber" style="margin-left:4px;">STANDARD</span></td><td>iワークで実施した単元＋関連既習単元を宿題として出す。難易度は基礎〜標準問題中心<br><small>例）一次関数を授業でやった→マスターから一次関数・比例・反比例も宿題に</small></td></tr>
+          <tr><td><strong>発展新演習</strong><br>（主教材）</td><td><span class="lvl b-green">PROGRESS</span></td><td>入試レベルの発展問題演習が中心。学校進度は本人に任せ、既習単元の応用・入試対策を全面的に実施</td></tr>
+          <tr><td><strong>ウイニング</strong><br>（副教材）</td><td><span class="lvl b-green">PROGRESS</span></td><td>発展新演習と並行して使用。入試頻出単元の補強・演習量の確保に活用</td></tr>
+          <tr><td><strong>計算トレーニング</strong></td><td>全学力層</td><td>宿題として出し、次回授業でスピードチェック</td></tr>
+          <tr><td><strong>証明問題</strong></td><td>STANDARD〜PROGRESS</td><td>初回は穴埋め形式で慣れさせてから、白紙に書かせる</td></tr>
+        </table>
+      </div></div>
+
       <!-- 小テスト -->
       <div class="panel" id="p-quiz"><div class="article">
         <h3>小テストについて</h3>
@@ -1100,7 +1464,12 @@ const PT={
   'pol-chobu':['英語長文ポラリス','高校生教材'],chart:['チャート式（白・黄・青）','高校生教材'],
   koukou:['高校生教材','授業・教材'],
   koko:['高校受験情報','受験情報'],daigaku:['大学受験情報','受験情報'],
-  chugaku:['中学受験情報','受験情報'],moshi:['模試の返却・フィードバック','授業・教材']
+  chugaku:['中学受験情報','受験情報'],moshi:['模試の返却・フィードバック','授業・教材'],
+  'sm-1vs3':['1対3授業の動かし方','科目別指導マニュアル'],
+  'sm-sho-kokugo':['小学生 国語の指導','科目別指導マニュアル › 小学生'],
+  'sm-sho-sansu':['小学生 算数の指導','科目別指導マニュアル › 小学生'],
+  'sm-chu-eigo':['中学生 英語の指導','科目別指導マニュアル › 中学生'],
+  'sm-chu-sugaku':['中学生 数学の指導','科目別指導マニュアル › 中学生']
 };
 
 function sp(id,btn){
